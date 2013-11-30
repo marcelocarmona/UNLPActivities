@@ -9,14 +9,7 @@
   <url>http://maven.apache.org</url>
   
   
-  <scm>
-    <connection>scm:git:https://github.com/mclo/UNLPActivities.git</connection>
-  </scm>
-  
-  
   <dependencies>
-
-
 	
 	
 	
