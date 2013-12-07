@@ -11,8 +11,6 @@
   
   <dependencies>
 	
-	
-	
 	<!-- Mysql -->
 	<dependency>
 		<groupId>mysql</groupId>
@@ -26,44 +24,32 @@
 	<dependency>
 		<groupId>org.hibernate</groupId>
 		<artifactId>hibernate-entitymanager</artifactId>
-		<version>4.1.8.Final</version>
+		<version>4.2.1.Final</version>
 	</dependency>
 	
 	<!-- Spring -->
+    
+    <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-jpa</artifactId>
+        <version>1.4.2.RELEASE</version>
+    </dependency>
+
+	<!-- usada por Spring para poder usar anotaciones en ves de beans.xml-->
 	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-context</artifactId>
-		<version>3.2.4.RELEASE</version>
+		<groupId>cglib</groupId>
+		<artifactId>cglib</artifactId>
+		<version>2.2.2</version>
 	</dependency>
 
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-tx</artifactId>
-		<version>3.2.4.RELEASE</version>
-	</dependency>
-
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-orm</artifactId>
-		<version>3.2.4.RELEASE</version>
-	</dependency>
-
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-jdbc</artifactId>
-		<version>3.2.4.RELEASE</version>
-	</dependency>
-            
-
+    
 	<!-- Junit -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.11</version>
       <scope>test</scope>
     </dependency>
-
-
 
 
   </dependencies>
