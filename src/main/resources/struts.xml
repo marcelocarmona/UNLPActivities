@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+ 
+    <package name="ttps.controller" extends="struts-default">
+ 
+        <action name="index">
+            <result>/index.jsp</result>
+        </action>
+ 		
+ 		<action name="registroInvitados">
+            <result>/registroInvitados.jsp</result>
+        </action>
+        
+ 		<action name="register" class="ttps.controller.Register">
+ 		    <result name="success">/index.jsp</result>
+            <result name="input">/registroInvitados.jsp</result>
+        </action>
+        
+    </package>
+    
+ 	<constant name="struts.objectFactory" 
+ 		    value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
+</struts>
