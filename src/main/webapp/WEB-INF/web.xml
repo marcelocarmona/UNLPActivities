@@ -4,4 +4,39 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+    
+  <!-- usado para configuracion de spring via xml (sin Spring Data) -->
+  	<!-- <context-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:/beans.xml</param-value>
+  	</context-param>-->
+	
+	<!-- usado para configuracion de Spring vía codigo java (con Spring Data)-->
+  	<context-param>
+      <param-name>contextClass</param-name>
+      <param-value>
+         org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+      </param-value>
+ 	 </context-param>
+ 	 
+ 	 <context-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>ttps.config.WebAppConfig</param-value>
+  	</context-param>
+  	
+  	
+  	<filter>
+ 		 <filter-name>struts2</filter-name>
+ 		 <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+ 
+	<filter-mapping>
+ 		 <filter-name>struts2</filter-name>
+  		 <url-pattern>/*</url-pattern>
+	</filter-mapping>
+		
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
 </web-app>

@@ -44,6 +44,10 @@
 		class="ttps.access.impl.hiberjpa.UserDAOhiberjpa">
 	</bean>
 	
+	<bean id="register" class="ttps.controller.Register" scope="prototype">
+		<property name="userDAO" ref="userDao" />
+	</bean>
+	
 	<bean id="tagDao" 
 		class="ttps.access.impl.hiberjpa.TagDAOhiberjpa">
 	</bean>

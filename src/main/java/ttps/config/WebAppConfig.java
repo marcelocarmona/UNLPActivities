@@ -36,7 +36,8 @@ import ttps.repository.UserRepository;
  */
 @Configuration
 @PropertySource("classpath:application.properties")
-//@ComponentScan("ttps.service") //para escanear servicios
+@ComponentScan("ttps") //para escanear servicios
+@EnableTransactionManagement
 @EnableJpaRepositories("ttps.repository")
 public class WebAppConfig  {
 	
