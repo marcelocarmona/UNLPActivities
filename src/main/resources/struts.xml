@@ -15,13 +15,31 @@
             <result>/registroInvitados.jsp</result>
         </action>
         
- 		<action name="register" class="ttps.controller.Register">
+ 		<action name="register" method="save" class="ttps.controller.UserAction">
  		    <result name="success">/index.jsp</result>
             <result name="input">/registroInvitados.jsp</result>
         </action>
         
+ 		<action name="listUser" method="list" class="ttps.controller.UserAction">
+			<result name="success">/listarModeradores.jsp</result>
+		</action>
+ 		
+ 		<action name="editUser" method="edit" class="ttps.controller.UserAction">
+			<result name="success" >/listarModeradores.jsp</result>
+		</action>
+		
+		<action name="deleteUser" method="delete" class="ttps.controller.UserAction">
+			<result name="success" type="redirect">listUser</result>
+		</action>
+		
+ 		<action name="updateUser" method="update" class="ttps.controller.UserAction">
+			<result name="success" type="redirect">listUser</result>
+		</action>
+ 		
     </package>
     
  	<constant name="struts.objectFactory" 
  		    value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
+ 	
+	<constant name="struts.configuration.xml.reload" value="true" />
 </struts>

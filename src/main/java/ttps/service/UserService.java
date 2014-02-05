@@ -18,6 +18,7 @@ import ttps.model.User;
 import ttps.repository.UserRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class UserService implements GenericService<User> {//extends PagingAndSortingService<UserRepository, User>
 		//implements UserRepository {
 
@@ -30,33 +31,37 @@ public class UserService implements GenericService<User> {//extends PagingAndSor
 //	}
 	
 	@Override
-	@Transactional
+	@Transactional(readOnly = false)
 	public User save(User user) {
 		return repository.save(user);
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void delete(long id) {
-		// TODO Auto-generated method stub
+		repository.delete(id);
 		
 	}
 
 	@Override
 	public List<User> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findAll();
 	}
 
 	@Override
-	public User update(User entity) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional(readOnly = false)
+	public User update(User user) {
+		User updatedUser = repository.findOne(user.getId());
+		updatedUser.setName(user.getName());
+		updatedUser.setLastName(user.getLastName());
+		updatedUser.setName(user.getName());
+		updatedUser.setPassword(user.getPassword());
+		return updatedUser;
 	}
 
 	@Override
 	public User findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findOne(id);
 	}
 	
 	

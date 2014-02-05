@@ -10,10 +10,10 @@
 <body>
 
 <s:form action="register" method="post">
-<s:textfield name="name" label="Nombre:" />
-<s:textfield name="lastName" label="Apellido:" />
-<s:password name="password" label="Contraseña:" />
-<s:password name="password2" label="Repetir Contraseña:" />
+<s:textfield name="name" label="Nombre" />
+<s:textfield name="lastName" label="Apellido" />
+<s:password name="password" label="Contraseña" />
+<s:password name="password2" label="Repetir Contraseña" />
 <s:submit value="Registrarme" />
 </s:form>
 

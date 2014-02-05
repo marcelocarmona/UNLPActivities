@@ -1,5 +1,8 @@
 package ttps.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,7 +20,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class Register extends ActionSupport implements ModelDriven<User>{
+public class UserAction extends ActionSupport implements ModelDriven<User>{
 	
 	/**
 	 * 
@@ -62,6 +65,9 @@ public class Register extends ActionSupport implements ModelDriven<User>{
 	@Autowired
 	private GenericService<User> userService;
 	
+	private List<User> userList = new ArrayList<User>();
+	
+	
 	public GenericService<User> getUserService() {
 		return userService;
 	}
@@ -70,36 +76,68 @@ public class Register extends ActionSupport implements ModelDriven<User>{
 		this.userService = userService;
 	}
 
-	public String execute() {
+	public String save() {
 //		user.setName(getName());
 //		user.setLastName(getLastName());
 //		user.setPassword(getPassword());
 		user.setProfile(new Guest());
-		if(userService == null)
-			System.out.println("esta nulo");
-		else userService.save(user);
+		userService.save(user);
 		return SUCCESS;
 	}
 	
-	public void validate(){
-		if (user.getName().equals(""))
-			addFieldError("name", "Se requiere un nombre de usuario");
-		if (user.getLastName().equals(""))
-			addFieldError("lastName","Se requiere un apellido");
-		if (user.getPassword().equals(""))
-			addFieldError("password", "Se requiere una contraseña");
-		HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-		
-		if (request.getParameter("password2").equals(""))
-			addFieldError("password2","Se requiere repetir la contraseña");
-		else if (!user.getPassword().equals(request.getParameter("password2")))
-			addFieldError("password2","las contraseñas deben coincidir");
+	public String list() {
+		userList=userService.findAll();
+		return SUCCESS;
 	}
+	
+	public String delete(){
+		HttpServletRequest request = (HttpServletRequest)
+		ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+		userService.delete(Long.parseLong(request.getParameter("id")));
+		return SUCCESS;
+	}
+	
+	public String edit() {
+		HttpServletRequest request = (HttpServletRequest)
+		ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+		user = userService.findById(Long.parseLong(request.getParameter("id")));
+		return SUCCESS;
+	}
+	
+	public String update() {
+		user.setProfile(new Guest());
+		userService.update(user);
+		return SUCCESS;
+	}
+	
+	
+//	public void validate(){
+//		if (user.getName().equals(""))
+//			addFieldError("name", "Se requiere un nombre de usuario");
+//		if (user.getLastName().equals(""))
+//			addFieldError("lastName","Se requiere un apellido");
+//		if (user.getPassword().equals(""))
+//			addFieldError("password", "Se requiere una contraseña");
+//		HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+//		
+//		if (request.getParameter("password2").equals(""))
+//			addFieldError("password2","Se requiere repetir la contraseña");
+//		else if (!user.getPassword().equals(request.getParameter("password2")))
+//			addFieldError("password2","las contraseñas deben coincidir");
+//	}
 
 	private User user= new User();
 	
 	@Override
 	public User getModel() {
 		return user;
+	}
+
+	public List<User> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
 	}
 }
