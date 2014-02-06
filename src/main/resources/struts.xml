@@ -34,6 +34,7 @@
 		
  		<action name="updateUser" method="update" class="ttps.controller.UserAction">
 			<result name="success" type="redirect">listUser</result>
+            <result name="input">/listarModeradores.jsp</result>
 		</action>
  		
     </package>
