@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Lista de Moderadores</title>
+<s:head />
 </head>
 <body>
 <% User user = (ttps.model.User)ActionContext.getContext().getValueStack().peek();

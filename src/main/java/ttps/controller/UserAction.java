@@ -85,7 +85,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 			if (request.getParameter("password2").equals(""))
 				addFieldError("password2","Se requiere repetir la contraseña");
 			else if (!user.getPassword().equals(request.getParameter("password2")))
-				addFieldError("password2","las contraseñas deben coincidir");
+				addFieldError("password2","Las contraseñas deben coincidir");
 		}
 	}
 
