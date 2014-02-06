@@ -11,46 +11,53 @@
 <s:head />
 </head>
 <body>
-<% User user = (ttps.model.User)ActionContext.getContext().getValueStack().peek();
-if (user.getId()!=0){ %>
-<s:form action="updateUser" method="post">
-	<s:hidden value="%{id}" name="id"/>
-	<s:textfield value="%{name}" name="name" label="Nombre" />
-	<s:textfield value="%{lastName}" name="lastName" label="Apellido" />
-	<s:password value="%{password}" name="password" label="Contraseña" />
-	<s:password name="password2" label="Repetir Contraseña" />
-	<s:submit value="Actualizar Usuario" />
-</s:form>
-<%} %>
+
+<s:if test="editable">
+	<s:form action="updateUser" method="post">
+		<s:textfield value="%{user.id}" name="id"/>
+		<s:textfield value="%{user.name}" name="name" label="Nombre" />
+		<s:textfield value="%{user.lastName}" name="lastName" label="Apellido" />
+		<s:password value="%{user.password}" name="password" label="Contraseña" />
+		<s:password name="password2" label="Repetir Contraseña" />
+		<s:submit value="Actualizar Usuario" />
+		<s:select list="{'hola','hola2'}"></s:select>
+	</s:form>
+</s:if>
+
 
 <s:url id="agregarURL" action="registroInvitados">
 </s:url> <s:a href="%{agregarURL}">Agregar Moderador</s:a>
-				
-<table>
-    <thead>
-        <tr>
-            <td>Nombre</td>
-            <td>Apellido</td>
-            <td>Contraseña</td>
-        </tr>
-    </thead>
-    <tbody>
-        <s:iterator value="userList" status="userStatus">
-            <tr>
-               	<td><s:property value="name" /></td>
-				<td><s:property value="lastName" /></td>
-				<td><s:property value="password" /></td>
-                <td><s:url id="editURL" action="editUser">
-				<s:param name="id" value="%{id}"></s:param>
-				</s:url>
-				<s:a href="%{editURL}">Edit</s:a></td>
-				<td><s:url id="deleteURL" action="deleteUser">
-				<s:param name="id" value="%{id}"></s:param>
-				</s:url> <s:a href="%{deleteURL}">Delete</s:a></td>
-            </tr>
-        </s:iterator>
-    </tbody>
-</table>
+
+	<table>
+		<thead>
+			<tr>
+				<td>Nombre</td>
+				<td>Apellido</td>
+				<td>Contraseña</td>
+			</tr>
+		</thead>
+		<tbody>
+			<s:iterator value="userList" status="userStatus">
+				<tr>
+					<td><s:property value="name" /></td>
+					<td><s:property value="lastName" /></td>
+					<td><s:property value="password" /></td>
+					<td><s:property value="id" /></td>
+					<td>
+						<s:url id="editURL" action="editUser">
+							<s:param name="idUser" value="%{id}"></s:param>
+						</s:url>
+						<s:a href="%{editURL}">Edit</s:a>
+					</td>
+					<td>
+						<s:url id="deleteURL" action="deleteUser">
+							<s:param name="idUser" value="%{id}"></s:param>
+						</s:url>
+						<s:a href="%{deleteURL}">Delete</s:a></td>
+					</tr>
+			</s:iterator>
+		</tbody>
+	</table>
 
 </body>
 </html>

@@ -3,20 +3,12 @@ package ttps.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ttps.access.api.UserDAO;
 import ttps.model.Guest;
 import ttps.model.User;
-import ttps.repository.UserRepository;
 import ttps.service.GenericService;
-import ttps.service.UserService;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -30,9 +22,31 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	@Autowired
 	private GenericService<User> userService;
 	
+	private User user= new User();
+	private String password2;
+	private long idUser;
+	private boolean editable = false; 
+	
 	private List<User> userList = new ArrayList<User>();
 	
 	
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public long getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(long idUser) {
+		this.idUser = idUser;
+	}
+
 	public GenericService<User> getUserService() {
 		return userService;
 	}
@@ -40,7 +54,15 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	public void setUserService(GenericService<User> userService) {
 		this.userService = userService;
 	}
+	
+	public boolean isEditable() {
+		return editable;
+	}
 
+	public void setEditable(boolean editable) {
+		this.editable = editable;
+	}
+	
 	public String save() {
 		user.setProfile(new Guest());
 		userService.save(user);
@@ -49,20 +71,18 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	
 	public String list() {
 		userList=userService.findAll();
+		setEditable(false);
 		return SUCCESS;
 	}
 	
 	public String delete(){
-		HttpServletRequest request = (HttpServletRequest)
-		ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-		userService.delete(Long.parseLong(request.getParameter("id")));
+		userService.delete((idUser));
 		return SUCCESS;
 	}
 	
 	public String edit() {
-		HttpServletRequest request = (HttpServletRequest)
-		ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-		user = userService.findById(Long.parseLong(request.getParameter("id")));
+		user = userService.findById((idUser));
+		setEditable(true);
 		return SUCCESS;
 	}
 	
@@ -81,16 +101,22 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 				addFieldError("lastName","Se requiere un apellido");
 			if (user.getPassword().equals(""))
 				addFieldError("password", "Se requiere una contraseña");
-			HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-			if (request.getParameter("password2").equals(""))
+			if (password2.equals(""))
 				addFieldError("password2","Se requiere repetir la contraseña");
-			else if (!user.getPassword().equals(request.getParameter("password2")))
+			else if (!user.getPassword().equals(password2))
 				addFieldError("password2","Las contraseñas deben coincidir");
 		}
 	}
 
-	private User user= new User();
-	
+
+	public String getPassword2() {
+		return password2;
+	}
+
+	public void setPassword2(String password2) {
+		this.password2 = password2;
+	}
+
 	@Override
 	public User getModel() {
 		return user;
