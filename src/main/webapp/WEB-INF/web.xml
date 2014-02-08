@@ -1,42 +1,63 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+    http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
 
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
-    
-  <!-- usado para configuracion de spring via xml (sin Spring Data) -->
-  	<!-- <context-param>
-      <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:/beans.xml</param-value>
-  	</context-param>-->
-	
-	<!-- usado para configuracion de Spring vía codigo java (con Spring Data)-->
-  	<context-param>
-      <param-name>contextClass</param-name>
-      <param-value>
+
+	<display-name>Archetype Created Web Application</display-name>
+
+	<!-- usado para configuracion de spring via xml (sin Spring Data) -->
+	<!-- <context-param> <param-name>contextConfigLocation</param-name> <param-value>classpath:/beans.xml</param-value> 
+		</context-param> -->
+
+	<!-- usado para configuracion de Spring vía codigo java (con Spring Data) -->
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>
          org.springframework.web.context.support.AnnotationConfigWebApplicationContext
       </param-value>
- 	 </context-param>
- 	 
- 	 <context-param>
-      <param-name>contextConfigLocation</param-name>
-      <param-value>ttps.config.WebAppConfig</param-value>
-  	</context-param>
-  	
-  	
-  	<filter>
- 		 <filter-name>struts2</filter-name>
- 		 <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</context-param>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>ttps.config.WebAppConfig</param-value>
+	</context-param>
+
+	<!-- Filtros usados por spring Security -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
- 
+
+
+	<!-- Filtros Strats 2 -->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+
 	<filter-mapping>
- 		 <filter-name>struts2</filter-name>
-  		 <url-pattern>/*</url-pattern>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
-		
+
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
 
 </web-app>
