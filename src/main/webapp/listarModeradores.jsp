@@ -20,6 +20,7 @@
 		<s:password value="%{user.password}" name="password" label="Contraseña" />
 		<s:password name="password2" label="Repetir Contraseña" />
 		<s:submit value="Actualizar Usuario" />
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<s:select list="{'hola','hola2'}"></s:select>
 	</s:form>
 </s:if>

@@ -6,15 +6,38 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.*;
 
+import ttps.security.CustomAuthenticationProvider;
+
+/**
+ * Referende
+ * http://docs.spring.io/spring-security/site/docs/3.2.0.RC2/reference/htmlsingle/
+ * http://spring.io/blog/2013/07/03/spring-security-java-config-preview-web-security/#web-security-hellowebsecurityconfiguration
+ * http://aykutakin.wordpress.com/2013/07/08/spring-security-spring-custom-authentication-provider/
+ * 
+ * 
+ * @author mclo
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+	CustomAuthenticationProvider customAuthenticationProvider;
 
+    /**
+     * Simple example
+     *  auth
+     *      .inMemoryAuthentication()
+     *          .withUser("user").password("password").roles("USER");
+     * 
+     * @param auth
+     * @throws Exception
+     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
+        auth.authenticationProvider(customAuthenticationProvider);
+
     }
 
 	/* (non-Javadoc)
@@ -23,7 +46,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		//agrego para que ignore la url (probando..)
-		web.ignoring().antMatchers("/listUser");
+//		web.ignoring().antMatchers("/listUser");
 	}
     
 }

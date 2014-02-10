@@ -3,12 +3,9 @@ UNLPActivities
 
 Proyecto de TTPS de la UNLP
 
+Frameworks
+===========
+Spring Data Jpa
+Spring Security
+Struts
 
-actualice el diagrama de ump de access :P
-==============
-
-Soy Gaston 2º prueba
-
-Vamos otra vez O_o
-
-otra ves yooo

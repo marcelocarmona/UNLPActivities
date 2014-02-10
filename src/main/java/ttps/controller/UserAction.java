@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ttps.model.Guest;
+
+
+
 import ttps.model.User;
-import ttps.service.GenericService;
+import ttps.service.impl.UserService;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -20,7 +22,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private GenericService<User> userService;
+	private UserService userService;
 	
 	private User user= new User();
 	private String password2;
@@ -46,14 +48,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	public void setIdUser(long idUser) {
 		this.idUser = idUser;
 	}
-
-	public GenericService<User> getUserService() {
-		return userService;
-	}
-
-	public void setUserService(GenericService<User> userService) {
-		this.userService = userService;
-	}
 	
 	public boolean isEditable() {
 		return editable;
@@ -64,7 +58,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	}
 	
 	public String save() {
-		user.setProfile(new Guest());
+//		user.setProfile(new Guest());
 		userService.save(user);
 		return SUCCESS;
 	}
@@ -76,19 +70,19 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	}
 	
 	public String delete(){
-		userService.delete((idUser));
+		userService.delete(idUser);
 		return SUCCESS;
 	}
 	
 	public String edit() {
-		user = userService.findById((idUser));
+		user = userService.findOne(idUser);
 		setEditable(true);
 		return SUCCESS;
 	}
 	
 	public String update() {
-		user.setProfile(new Guest());
-		userService.update(user);
+//		user.setProfile(new Guest());
+		userService.save(user);
 		return SUCCESS;
 	}
 	

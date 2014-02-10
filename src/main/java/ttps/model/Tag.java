@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import com.sun.org.apache.bcel.internal.generic.CASTORE;
-
 @Entity
 public class Tag implements Serializable{
 	/**

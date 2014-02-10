@@ -20,7 +20,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import ttps.model.User;
 import ttps.repository.UserRepository;
@@ -36,8 +35,8 @@ import ttps.repository.UserRepository;
  */
 @Configuration
 @PropertySource("classpath:application.properties")
-@ComponentScan("ttps") //para escanear servicios
-@EnableTransactionManagement //me parece que no es necesario gracias a @EnableJpaRepositories("ttps.repository") , probar
+@ComponentScan("ttps") //para escanear servicios @component @service
+//@EnableTransactionManagement //me parece que no es necesario gracias a @EnableJpaRepositories("ttps.repository") , probar
 @EnableJpaRepositories("ttps.repository") //spring data
 public class SpringDataConfig  {
 	

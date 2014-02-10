@@ -1,4 +1,4 @@
-package ttps.service;
+package ttps.pruebas;
 
 import javax.annotation.Resource;
 

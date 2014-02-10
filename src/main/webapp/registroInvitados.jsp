@@ -15,6 +15,7 @@
 		<s:textfield name="lastName" label="Apellido" />
 		<s:password name="password" label="Contraseña" />
 		<s:password name="password2" label="Repetir Contraseña" />
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<s:submit value="Registrarme" />
 	</s:form>
 

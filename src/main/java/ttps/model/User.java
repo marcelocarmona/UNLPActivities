@@ -1,40 +1,50 @@
 package ttps.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Entity
-public class User implements Serializable{
-	/**
-	 * 
-	 */
+public class User implements UserDetails, Serializable{
+
 	private static final long serialVersionUID = 1L;
-	@Id @GeneratedValue
+	
+	@Id
+	@GeneratedValue
 	private long id;
 	private String name;
 	private String lastName;
-	private String password;
-	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="profile_fk")
-	private Profile profile;
-	
+	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
+	private List<Post> posts;
+	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
+	private List<Event> events;
 	//@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
 	//private List<AbstractPublic> publics;
 	
-	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
-	private List<Post> posts;
 	
-	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
-	private List<Event> events;
+	/* Spring Security fields */
+	private String username;
+	private String password;
+	@OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@JoinColumn(name="user_id")
+	private Collection<Role> authorities;
+	private boolean accountNonExpired;
+	private boolean accountNonLocked;
+	private boolean credentialsNonExpired;
+	private boolean enabled;
+	
 
 	public User(){
 	}
@@ -42,26 +52,124 @@ public class User implements Serializable{
 	public User(String name) {
 		super();
 		this.name = name;
+		this.username = name;
+		this.lastName = name;
+		this.password = name;
+		this.authorities = new ArrayList<Role>();
+		this.accountNonExpired = true;
+		this.accountNonLocked = true;
+		this.credentialsNonExpired = true;
+		this.enabled = true;
+	}
+	
+	
+
+	public User(String name, String lastName, List<Post> posts,
+			List<Event> events, String username, String password,
+			Collection<Role> authorities, boolean accountNonExpired,
+			boolean accountNonLocked, boolean credentialsNonExpired,
+			boolean enabled) {
+		super();
+		this.name = name;
+		this.lastName = lastName;
+		this.posts = posts;
+		this.events = events;
+		this.username = username;
+		this.password = password;
+		this.authorities = authorities;
+		this.accountNonExpired = accountNonExpired;
+		this.accountNonLocked = accountNonLocked;
+		this.credentialsNonExpired = credentialsNonExpired;
+		this.enabled = enabled;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public String getLastName() {
 		return lastName;
 	}
+	
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public Profile getProfile() {
-		return profile;
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
 	}
-	public void setProfile(Profile profile) {
-		this.profile = profile;
+	
+	public void setAuthorities(List<Role> authorities) {
+		this.authorities = authorities;
 	}
+
+	@Override
+	public String getUsername() {
+		return username;
+	}
+	
+	public void setUsername(String username){
+		this.username = username;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return accountNonExpired;
+	}
+	
+	public void setAccountNonExpired(boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return accountNonLocked;
+	}
+	
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return credentialsNonExpired;
+	}
+	
+	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
+	
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	public List<Post> getPosts() {
 		return posts;
 	}
@@ -75,21 +183,4 @@ public class User implements Serializable{
 		this.events = events;
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	
 }
