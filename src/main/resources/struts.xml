@@ -56,3 +56,4 @@
  	
 	<constant name="struts.configuration.xml.reload" value="true" />
 </struts>
+
