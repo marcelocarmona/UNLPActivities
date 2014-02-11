@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-    xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
-
-  <jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
-  <jsp:output omit-xml-declaration="true" />
-  <jsp:output doctype-root-element="HTML"
-              doctype-system="about:legacy-compat" />
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib uri="/struts-tags" prefix="s"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html lang="en">
   <head>
     <title>Hello World</title>
@@ -17,6 +16,39 @@
     <p>
       Hello <b><c:out value="${pageContext.request.remoteUser}"/></b>
     </p>
+    <ul>
+    <sec:authorize access="hasRole('ADMIN')">
+		<li>
+  		<s:url id="agregarURL" action="listUser">
+		</s:url> <s:a href="%{agregarURL}">Listar Moderadores</s:a>
+		</li>
+	</sec:authorize>
+	
+  	<li><s:a href="#"> Ver Posts</s:a></li>
+    <li><s:a href="#"> Ver Eventos</s:a></li>
+    
+    <sec:authorize access="hasAnyRole('ADMIN', 'STUDENT')">
+  		<li><s:a href="#"> Crear un nuevo Post</s:a></li>
+    	<li><s:a href="#"> Crear un nuevo Evento</s:a></li>
+    </sec:authorize>
+    
+    <sec:authorize access="hasRole('MODERATOR')">
+  		<li><s:a href="#"> Chequear Posts</s:a></li>
+    	<li><s:a href="#"> Chequear Eventos</s:a></li>
+    </sec:authorize>
+    
+    <sec:authorize access="isAuthenticated()">
+  		<li><s:a href="#"> Comentar Posts</s:a></li>
+    </sec:authorize>
+    
+    <sec:authorize access="not isAnonymous()">
+
+  		<s:url id="registroURL" action="registroInvitados">
+		</s:url> <s:a href="%{registroURL}">Registrarme</s:a>
+		
+	</sec:authorize>
+    </ul>
+    
     <c:url var="logoutUrl" value="/logout"/>
     <form class="form-inline" action="${logoutUrl}" method="post">
       <input type="submit" value="Log out" />
@@ -25,4 +57,4 @@
   </div>
 </body>
 </html>
-</jsp:root>
+

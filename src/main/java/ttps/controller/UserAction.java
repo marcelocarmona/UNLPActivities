@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
-
-
+import ttps.model.Event;
+import ttps.model.Post;
+import ttps.model.Role;
 import ttps.model.User;
 import ttps.service.impl.UserService;
 
@@ -30,7 +30,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	private boolean editable = false; 
 	
 	private List<User> userList = new ArrayList<User>();
-	
+	private String authority;
 	
 	
 	public User getUser() {
@@ -58,9 +58,11 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	}
 	
 	public String save() {
-//		user.setProfile(new Guest());
-		userService.save(user);
-		return SUCCESS;
+		ArrayList<Role> roles = new ArrayList<Role>();
+        roles.add(new Role(authority));
+        userService.save(
+        		new User(user.getName(),user.getLastName(),new ArrayList<Post>(),new ArrayList<Event>(), user.getUsername(),user.getPassword(), roles,true,true,true,true));
+        return SUCCESS;
 	}
 	
 	public String list() {
@@ -80,17 +82,17 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		return SUCCESS;
 	}
 	
-	public String update() {
-//		user.setProfile(new Guest());
-		userService.save(user);
+	public String regMod() {
+		setEditable(true);
 		return SUCCESS;
 	}
 	
-	
 	public void validate(){
 		if(user.getName()!=null){
+			if (user.getUsername().equals(""))
+				addFieldError("username", "Se requiere un nombre de usuario");
 			if (user.getName().equals(""))
-				addFieldError("name", "Se requiere un nombre de usuario");
+				addFieldError("name", "Se requiere un nombre");
 			if (user.getLastName().equals(""))
 				addFieldError("lastName","Se requiere un apellido");
 			if (user.getPassword().equals(""))
@@ -122,5 +124,13 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 
 	public void setUserList(List<User> userList) {
 		this.userList = userList;
+	}
+
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 }

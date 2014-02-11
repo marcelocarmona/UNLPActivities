@@ -11,12 +11,14 @@
 <body>
 
 	<s:form action="register" method="post">
+		<s:textfield name="username" label="Nombre de Usuario" />
 		<s:textfield name="name" label="Nombre" />
 		<s:textfield name="lastName" label="Apellido" />
 		<s:password name="password" label="Contraseña" />
 		<s:password name="password2" label="Repetir Contraseña" />
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<s:hidden name="authority" value="GUEST" />
 		<s:submit value="Registrarme" />
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	</s:form>
 
 </body>
