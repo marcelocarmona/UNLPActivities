@@ -5,7 +5,10 @@ Proyecto de TTPS de la UNLP
 
 Frameworks
 ===========
-Spring Data Jpa
-Spring Security
-Struts
+* Spring Data Jpa
+* Hibernate
+* Spring Security
+* Struts 2
+* Tiles 3
+* Bootstrap
 

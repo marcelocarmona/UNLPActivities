@@ -5,10 +5,18 @@
  
 <struts>
  
-    <package name="ttps.controller" extends="struts-default">
+    <package name="ttps.controller" extends="tiles-default" >
  
-        <action name="index">
-            <result>/index.jsp</result>
+        <action name="">
+            <result type="tiles">index</result>
+        </action>
+        
+        <action name="login2">
+            <result type="tiles">login</result>
+        </action>
+        
+        <action name="user">
+            <result type="tiles">user</result>
         </action>
  		
  		<action name="registroInvitados">
@@ -32,9 +40,13 @@
 			<result name="success" type="redirect">listUser</result>
 		</action>
 		
- 		<action name="updateUser" method="update" class="ttps.controller.UserAction">
+		<action name="registroModerador" method="regMod" class="ttps.controller.UserAction">
+			<result name="success">/listarModeradores.jsp</result>
+		</action>
+				
+ 		<action name="updateUser" method="save" class="ttps.controller.UserAction">
 			<result name="success" type="redirect">listUser</result>
-            <result name="input">/listarModeradores.jsp</result>
+            <result name="input" type="redirect">listUser</result>
 		</action>
  		
     </package>
