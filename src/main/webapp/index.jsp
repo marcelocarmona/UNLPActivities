@@ -14,7 +14,7 @@
   <div class="container">
     <h1>This is secured!</h1>
     <p>
-      Hello <b><c:out value="${pageContext.request.remoteUser}"/></b>
+      Hello <b><c:out value="${pageContext}"/></b>
     </p>
     <ul>
     <sec:authorize access="hasRole('ADMIN')">

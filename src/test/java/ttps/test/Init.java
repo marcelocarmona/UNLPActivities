@@ -25,12 +25,12 @@ public class Init {
         roles.add(new Role("ADMIN"));
         
         userService.save(
-        new User("user1","lastName",new ArrayList<Post>(),new ArrayList<Event>(), "user1","user1", roles,true,true,true,true));
+        new User("user1"));
         
         ArrayList<Role> roles2 = new ArrayList<Role>();
         roles2.add(new Role("MODERATOR"));
         userService.save(
-                new User("user2","lastName",new ArrayList<Post>(),new ArrayList<Event>(), "user2","user2", roles2,true,true,true,true));
+                new User("user2"));
                 
         
         context.close();

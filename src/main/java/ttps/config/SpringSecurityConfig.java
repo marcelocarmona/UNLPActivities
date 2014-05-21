@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.*;
 import ttps.security.CustomAuthenticationProvider;
 
 /**
- * Referende
+ * Reference
  * http://docs.spring.io/spring-security/site/docs/3.2.0.RC2/reference/htmlsingle/
  * http://spring.io/blog/2013/07/03/spring-security-java-config-preview-web-security/#web-security-hellowebsecurityconfiguration
  * http://aykutakin.wordpress.com/2013/07/08/spring-security-spring-custom-authentication-provider/

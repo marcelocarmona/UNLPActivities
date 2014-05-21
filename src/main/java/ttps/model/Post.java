@@ -17,13 +17,15 @@ public class Post extends AbstractPublic {
 	@OneToMany(mappedBy="post",cascade = CascadeType.ALL)
 	private List<Comment> comments;
 	
+	private String content;
+	
 	private boolean privacity;
 	
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "Post_Tag", joinColumns = { @JoinColumn(name = "id_post") }, inverseJoinColumns = { @JoinColumn(name = "id_tag") })
 	private List<Tag> tags;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name="id_user")
 	private User user;
 	
@@ -55,5 +57,13 @@ public class Post extends AbstractPublic {
 	}
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 }

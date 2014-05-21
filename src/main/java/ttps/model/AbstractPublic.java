@@ -16,18 +16,21 @@ public abstract class AbstractPublic implements Serializable{
 	@Id @GeneratedValue(strategy = GenerationType.TABLE)
 	private long id;
 	
+	private String title;
+
+	private String description;
+
+	@ManyToOne(cascade = CascadeType.DETACH)
+	@JoinColumn(name="id_category")
+	private Category category;
+
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
 	}
-	private String title;
-	private String description;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="id_category")
-	private Category category;
 	
 	/*@ManyToOne
 	@JoinColumn(name="id_user")

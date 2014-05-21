@@ -6,19 +6,19 @@
 
 <tiles-definitions>
 
-	<definition name="index" template="/layout.jsp">
+	<definition name="index" template="/WEB-INF/pages/layout.jsp">
 		<put-attribute name="title" value="Welcome Page" />
-		<put-attribute name="body" value="/index.jsp" />
+		<put-attribute name="body" value="/WEB-INF/pages/index.jsp" />
 	</definition>
 	
-	<definition name="login" template="/layout.jsp">
+	<definition name="login" template="/WEB-INF/pages/layout.jsp">
 		<put-attribute name="title" value="Welcome Page" />
-		<put-attribute name="body" value="/login.jsp" />
+		<put-attribute name="body" value="/WEB-INF/pages/login.jsp" />
 	</definition>
 
-	<definition name="user" template="/layout.jsp">
+	<definition name="user" template="/WEB-INF/pages/layout.jsp">
 		<put-attribute name="title" value="Login Error" />
-		<put-attribute name="body" value="/user.jsp" />
+		<put-attribute name="body" value="/WEB-INF/pages/user.jsp" />
 	</definition>
 
 </tiles-definitions> 

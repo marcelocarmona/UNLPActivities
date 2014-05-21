@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%-- <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%> --%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -103,7 +103,7 @@
 	</div>
 
 	<!-- Librería jQuery requerida por los plugins de JavaScript -->
-	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="js/jquery.js"></script>
 
 	<!-- Todos los plugins JavaScript de Bootstrap (también puedes
          incluir archivos JavaScript individuales de los únicos
