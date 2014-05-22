@@ -15,6 +15,8 @@ import ttps.security.CustomAuthenticationProvider;
  * http://spring.io/blog/2013/07/03/spring-security-java-config-preview-web-security/#web-security-hellowebsecurityconfiguration
  * http://aykutakin.wordpress.com/2013/07/08/spring-security-spring-custom-authentication-provider/
  * 
+ * Custom form login
+ * http://www.srccodes.com/p/article/35/spring-security-custom-login-form-example
  * 
  * @author mclo
  *
@@ -50,8 +52,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		//web.ignoring().antMatchers("/listUser");
 		//web.ignoring().antMatchers("/registroInvitados");
 	}
+
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
+		
+		 //authorizeRequests for css and javascript bootstrap
+		 http.authorizeRequests().antMatchers("/struts/**").permitAll();
+		 
 		 http
          .csrf()
              .disable()
@@ -65,6 +72,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
              .and()
          .formLogin()
              .permitAll();
+
+
+		 
+		 //custom form login
+		 http.formLogin()
+		 	.loginPage("/login").loginProcessingUrl("/login-processing")
+		 	.failureUrl("/login?auth=fail").defaultSuccessUrl("/index")
+		 	.usernameParameter("username")
+		 	.passwordParameter("password")
+		 	.and()
+		 		.logout().logoutSuccessUrl("/index");
      
 
     }
