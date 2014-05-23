@@ -2,23 +2,11 @@
 <%@ taglib prefix="sb" uri="/struts-bootstrap-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-<!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-<sj:head  />
-<sb:head />
-</head>
-<body>
-
-<div class="container">
+<jsp:include  page="/WEB-INF/content/layout/header.jsp" />
 
 
 
-
+<div class="table-responsive panel panel-default">
 	<table class="table " >
 		<thead>
 			<tr>
@@ -32,6 +20,7 @@
 				<th>nationality</th>
 				<th>profession</th>
 				<th>Actions</th>
+				<th>Role</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -46,6 +35,7 @@
 					<td><s:property value="birthday" /></td>
 					<td><s:property value="nationality" /></td>
 					<td><s:property value="profession" /></td>
+					<td><s:property value="role" /></td>
 					
 					<td>
 						<s:url id="editURL" action="edit">
@@ -67,13 +57,9 @@
 			</s:iterator>
 		</tbody>
 	</table>
-
+</div>
 	<s:url id="createURL" action="edit"/>
 	<s:a href="%{createURL}" cssClass="btn btn-primary">Create</s:a>
 
 
-</div>
-
-
-</body>
-</html>
+<jsp:include page="/WEB-INF/content/layout/footer.jsp" />

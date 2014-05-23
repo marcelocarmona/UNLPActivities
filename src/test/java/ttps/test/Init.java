@@ -1,8 +1,6 @@
 package ttps.test;
 
 
-import java.util.ArrayList;
-
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 
@@ -21,16 +19,10 @@ public class Init {
         UserService userService = context.getBean(UserService.class);
         
         
-        ArrayList<Role> roles = new ArrayList<Role>();
-        roles.add(new Role("ADMIN"));
         
-        userService.save(
-        new User("user1"));
+        userService.save(new User("user1"));
         
-        ArrayList<Role> roles2 = new ArrayList<Role>();
-        roles2.add(new Role("MODERATOR"));
-        userService.save(
-                new User("user2"));
+        userService.save(new User("user2"));
                 
         
         context.close();

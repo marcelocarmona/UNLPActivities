@@ -55,26 +55,22 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
-		
-		 //authorizeRequests for css and javascript bootstrap
-		 http.authorizeRequests().antMatchers("/struts/**").permitAll();
-		 
 		 http
          .csrf()
              .disable()
          .authorizeRequests()
-             .antMatchers("/registroInvitados*").permitAll()
-             .antMatchers("/register**").permitAll()
-             .antMatchers("/login**").permitAll()
-             .antMatchers("/logout*").permitAll()
-             .antMatchers("/listUser*").hasAuthority("ADMIN")
-             .anyRequest().authenticated()
-             .and()
+         	//authorizeRequests for css and javascript bootstrap
+         	.antMatchers("/struts/**").permitAll()
+         	.antMatchers("/index").permitAll()
+			.antMatchers("/").permitAll()
+			.antMatchers("/login**").permitAll()
+			.antMatchers("/logout*").permitAll()
+			.antMatchers("/listUser*").hasAuthority("ADMIN")
+			.anyRequest().authenticated()
+			.and()
          .formLogin()
              .permitAll();
 
-
-		 
 		 //custom form login
 		 http.formLogin()
 		 	.loginPage("/login").loginProcessingUrl("/login-processing")
@@ -83,7 +79,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		 	.passwordParameter("password")
 		 	.and()
 		 		.logout().logoutSuccessUrl("/index");
-     
 
     }
 }

@@ -3,21 +3,23 @@
 <%@ taglib prefix="sb" uri="/struts-bootstrap-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
 
-<html>
-<head>
-<title>My Secured Page</title>
-</head>
-<body>
-    <h3>Index de Prueba</h3>
-    <a href="${pageContext.request.contextPath}/logout">Logout</a>
-    <s:action name="logout">Logout</s:action>
-    <s:action name="login">Login</s:action>
-    <s:a action="logout" >Logout</s:a>
-    <s:a action="login">Login</s:a>
-    
-    <div>
-    
-     <s:a action="user/list">User/list</s:a>
-    </div>
-</body>
-</html>
+<jsp:include page="layout/header.jsp" />
+
+<h3>Index de Prueba</h3>
+
+<br />Desde un JSP
+<br />Objeto User : <s:property value="#session.SPRING_SECURITY_CONTEXT.authentication.principal" />
+<br />User role: <s:property value="#session.SPRING_SECURITY_CONTEXT.authentication.authorities" />
+<br />
+<br />
+<br />Desde un Action (hay que castear)
+<p>
+	System.out.println(((org.springframework.security.core.context.SecurityContext)
+	ActionContext.getContext().getSession().get("SPRING_SECURITY_CONTEXT")).getAuthentication().getAuthorities());</p>
+
+
+
+<br />User : <s:property value="#session.SPRING_SECURITY_CONTEXT.authentication.principal.id" />
+<jsp:include page="layout/footer.jsp" />
+
+

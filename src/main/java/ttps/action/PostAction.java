@@ -10,13 +10,14 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.opensymphony.xwork2.ActionSupport;
+
 import ttps.model.Category;
 import ttps.model.Post;
 import ttps.service.impl.CategoryService;
 import ttps.service.impl.PostService;
 
-import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
+
 
 @Namespace("/post")
 public class PostAction extends ActionSupport{

@@ -1,34 +1,29 @@
 package ttps.model;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-
-
-
-
-
-
-
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
+/**
+ * Reference spring security
+ * http://en.tekstenuitleg.net/blog/spring-security-with-roles-and-rights
+ * 
+ * @author mclo
+ */
 @Entity
 public class User implements UserDetails, Serializable{
 	
@@ -55,6 +50,9 @@ public class User implements UserDetails, Serializable{
 	
 	private String profession;
 	
+	@Enumerated
+	private Role role;
+	
 	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
 	private List<Post> posts;
 	
@@ -68,14 +66,6 @@ public class User implements UserDetails, Serializable{
 	@Column(unique = true, nullable = false)
 	private String username;
 	private String password;
-	
-//	@OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-//	@JoinColumn(name="user_id")
-//	private Collection<Role> authorities;
-
-	@OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-	@JoinColumn(name="user_id")
-	private Collection<Role> authorities;	
 	private boolean accountNonExpired;
 	private boolean accountNonLocked;
 	private boolean credentialsNonExpired;
@@ -99,30 +89,32 @@ public class User implements UserDetails, Serializable{
 		this.profession = name;
 		this.username = name;
 		this.password = name;
-		this.authorities = new ArrayList<Role>();
+		this.role = Role.STUDENT;
 		this.accountNonExpired = true;
 		this.accountNonLocked = true;
 		this.credentialsNonExpired = true;
 		this.enabled = true;
 	}
 
-	public User(String name, String lastName, String mail,
-			String nationality, String profession, List<Post> posts,
-			List<Event> events, String username, String password,
-			Collection<Role> authorities, boolean accountNonExpired,
+	public User(String name, String lastName, Gender gender, String mail,
+			String birthday, String nationality, String profession, Role role,
+			List<Post> posts, List<Event> events, String username,
+			String password, boolean accountNonExpired,
 			boolean accountNonLocked, boolean credentialsNonExpired,
 			boolean enabled) {
 		super();
 		this.name = name;
 		this.lastName = lastName;
+		this.gender = gender;
 		this.mail = mail;
+		this.birthday = birthday;
 		this.nationality = nationality;
 		this.profession = profession;
+		this.role = role;
 		this.posts = posts;
 		this.events = events;
 		this.username = username;
 		this.password = password;
-		this.authorities = authorities;
 		this.accountNonExpired = accountNonExpired;
 		this.accountNonLocked = accountNonLocked;
 		this.credentialsNonExpired = credentialsNonExpired;
@@ -203,13 +195,24 @@ public class User implements UserDetails, Serializable{
 		this.profession = profession;
 	}
 
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	/**
+	 * return authorities - spring security
+	 * 
+	 * @see org.springframework.security.core.userdetails.UserDetails#getAuthorities()
+	 */
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+		authorities.add(role);
 		return authorities;
-	}
-	
-	public void setAuthorities(Collection<Role> authorities) {
-		this.authorities = authorities;
 	}
 
 	@Override

@@ -1,15 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@taglib uri="/struts-tags" prefix="s"%>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-<h2>Lista de Posts</h2>
+
+<jsp:include  page="/WEB-INF/content/layout/header.jsp" />
+
+
 <table>
 		<thead>
 			<tr>
@@ -40,5 +36,6 @@
 			</s:iterator>
 		</tbody>
 	</table>
-</body>
-</html>
+
+
+<jsp:include page="/WEB-INF/content/layout/footer.jsp" />

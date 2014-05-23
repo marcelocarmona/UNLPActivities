@@ -1,14 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="sb" uri="/struts-bootstrap-tags"%>
+<%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>View</title>
-</head>
-<body>
+<jsp:include  page="/WEB-INF/content/layout/header.jsp" />
 
 
 
@@ -24,5 +18,4 @@
 <br>Enabled: <s:property value="user.enabled" />
 
 
-</body>
-</html>
+<jsp:include page="/WEB-INF/content/layout/footer.jsp" />

@@ -1,18 +1,15 @@
 package ttps.action;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ttps.model.Gender;
-import ttps.model.Roles;
+import ttps.model.Role;
 import ttps.model.User;
 import ttps.service.impl.UserService;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import org.apache.struts2.convention.annotation.Namespace;
@@ -30,8 +27,7 @@ public class UserAction extends ActionSupport {
 	private long id;
 	private User user;
 	private Gender[] genders = Gender.values();
-//	private Roles[] roles = Roles.values();
-	private List<String> authorities = new ArrayList<String>(Arrays.asList("ADMIN", "GUEST", "OTHER"));
+	private Role[] roles = Role.values();
 	
 	
 	//Getters and Setters
@@ -67,22 +63,14 @@ public class UserAction extends ActionSupport {
 	public void setGenders(Gender[] genders) {
 		this.genders = genders;
 	}
-	
-	public List<String> getAuthorities() {
-		return authorities;
+
+	public Role[] getRoles() {
+		return roles;
 	}
 
-	public void setAuthorities(List<String> authorities) {
-		this.authorities = authorities;
+	public void setRoles(Role[] roles) {
+		this.roles = roles;
 	}
-
-//	public Roles[] getRoles() {
-//		return roles;
-//	}
-//
-//	public void setRoles(Roles[] roles) {
-//		this.roles = roles;
-//	}
 
 	//Actions
 	
