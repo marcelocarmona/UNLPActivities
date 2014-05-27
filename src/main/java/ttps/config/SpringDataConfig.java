@@ -1,16 +1,14 @@
 package ttps.config;
 
-import java.util.List;
+import java.util.Properties;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -20,9 +18,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import ttps.model.User;
-import ttps.repository.UserRepository;
 
 
 /**
@@ -34,9 +31,9 @@ import ttps.repository.UserRepository;
  *
  */
 @Configuration
-@PropertySource("classpath:application.properties")
+@EnableTransactionManagement
+@PropertySource("classpath:/ttps/config/application.properties")
 @ComponentScan("ttps") //para escanear servicios @component @service
-//@EnableTransactionManagement //me parece que no es necesario gracias a @EnableJpaRepositories("ttps.repository") , probar
 @EnableJpaRepositories("ttps.repository") //spring data
 public class SpringDataConfig  {
 	
@@ -67,7 +64,7 @@ public class SpringDataConfig  {
     /**
      * Defines a LocalContainerEntityManagerFactoryBean that is ultimately used to create a proxy bean
      * that implements the EntityManagerFactory interface. It is the bean through which JPA operations will be performed.
-     * Note that this factory bean’s packagesToScan property is set to look for entities in the package named "ttps.repository".
+     * Note that this factory bean’s packagesToScan property is set to look for entities in the package named "ttps.model".
      * This makes it possible to work with JPA without defining a "persistence.xml" file.
      * 
      * 
@@ -81,10 +78,19 @@ public class SpringDataConfig  {
         lef.setDataSource(dataSource);
         lef.setJpaVendorAdapter(jpaVendorAdapter);
         lef.setPackagesToScan("ttps.model");
+        lef.setJpaProperties(additionalProperties());
         return lef;
     }
 
-    /**
+    private Properties additionalProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        properties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+        properties.setProperty("hibernate.hbm2ddl.import_files",env.getProperty("hibernate.hbm2ddl.import_files"));
+        return properties;
+	}
+
+	/**
      * Defines a Hibernate-based JPA vendor adapter bean for use by the EntityManagerFactory bean
      * 
      * @return
@@ -108,43 +114,5 @@ public class SpringDataConfig  {
         return new JpaTransactionManager();
     }
     
-    
-    /**
-     * Este main lo puse para probar cosas despues cuando este todo en orden se borra
-     */
-    public static void main(String[] args) {
-        AbstractApplicationContext context = new AnnotationConfigApplicationContext(WebAppConfig.class);
-        UserRepository repository = context.getBean(UserRepository.class);
-
-        // save a user
-        repository.save(new User("pepeee"));
-
-
-        // fetch all users
-        Iterable<User> customers = repository.findAll();
-        System.out.println("Customers found with findAll():");
-        System.out.println("-------------------------------");
-        for (User customer : customers) {
-            System.out.println(customer);
-        }
-        System.out.println();
-
-        // fetch an individual customer by ID
-//        Customer customer = repository.findOne(1L);
-//        System.out.println("Customer found with findOne(1L):");
-//        System.out.println("--------------------------------");
-//        System.out.println(customer);
-//        System.out.println();
-
-        // fetch customers by last name
-        List<User> bauers = repository.findByName("pepeee");
-        System.out.println("users found with findByLastName('pepeee'):");
-        System.out.println("--------------------------------------------");
-        for (User bauer : bauers) {
-            System.out.println(bauer);
-        }
-
-        context.close();
-    }
 
 }

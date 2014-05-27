@@ -15,10 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ttps.model.User;
 import ttps.repository.UserRepository;
+import ttps.service.UserService;
 
 @Service
 @Transactional(readOnly = true)
-public class UserService implements ttps.service.UserService , UserDetailsService {
+public class UserServiceImpl implements UserService, UserDetailsService  {
 
 	@Resource
 	private UserRepository userRepository;

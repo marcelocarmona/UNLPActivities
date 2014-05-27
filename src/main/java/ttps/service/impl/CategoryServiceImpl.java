@@ -12,15 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ttps.model.Category;
 import ttps.repository.CategoryRepository;
+import ttps.service.CategoryService;
 
 @Service
 @Transactional(readOnly = true)
-public class CategoryService implements CategoryRepository {
-
+public class CategoryServiceImpl implements CategoryService {
 
 	@Resource
 	private CategoryRepository categoryRepository;
-	
+
 	@Override
 	public List<Category> findAll() {
 		return categoryRepository.findAll();

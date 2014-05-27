@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ttps.model.Gender;
 import ttps.model.Role;
 import ttps.model.User;
-import ttps.service.impl.UserService;
+import ttps.service.UserService;
 
 import com.opensymphony.xwork2.ActionSupport;
 

@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import ttps.model.User;
-import ttps.service.impl.UserService;
+import ttps.service.UserService;
 
 /**
  * autentifica el usuario y crea el token que se puede ver en al session

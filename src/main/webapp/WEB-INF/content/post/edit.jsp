@@ -17,6 +17,12 @@
 				list="categories" listKey="id" listValue="name" /> 
 		
 		<s:textarea name="post.content" label="Contenido" cols="80" rows="20"/>
+		
+		<s:textfield name="tagString1" label="Tag 1"  />
+		<s:textfield name="tagString2" label="Tag 2"  />
+		<s:textfield name="tagString3" label="Tag 3"  />
+		<s:textfield name="tagString4" label="Tag 4"  />
+		
 		<s:checkbox name="post.privacity" label="Privado?" />
 		
 		<s:submit value="Guardar" />

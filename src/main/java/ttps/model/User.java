@@ -1,6 +1,7 @@
 package ttps.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -54,10 +55,10 @@ public class User implements UserDetails, Serializable{
 	private Role role;
 	
 	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
-	private List<Post> posts;
+	private List<Post> posts = new ArrayList<Post>();
 	
 	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
-	private List<Event> events;
+	private List<Event> events = new ArrayList<Event>();
 	//@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
 	//private List<AbstractPublic> publics;
 	
@@ -75,33 +76,18 @@ public class User implements UserDetails, Serializable{
 	public User(){
 	}
 	
-	//TODO Borrar Contructor
-	/**
-	 * Single constructor to Test
-	 * @param name name of user
-	 */
-	public User(String name) {
-		super();
-		this.name = name;
-		this.lastName = name;
-		this.mail = name+"@email.com";
-		this.nationality = name;
-		this.profession = name;
-		this.username = name;
-		this.password = name;
-		this.role = Role.STUDENT;
-		this.accountNonExpired = true;
-		this.accountNonLocked = true;
-		this.credentialsNonExpired = true;
-		this.enabled = true;
+
+	public User(String name, String lastName, Gender gender, String mail,
+			String birthday, String nationality, String profession, Role role,
+			String username,
+			String password) {
+		this(name,lastName,gender,mail,birthday,nationality,profession,role,new ArrayList<Post>(),new ArrayList<Event>(),username,password);
 	}
 
 	public User(String name, String lastName, Gender gender, String mail,
 			String birthday, String nationality, String profession, Role role,
 			List<Post> posts, List<Event> events, String username,
-			String password, boolean accountNonExpired,
-			boolean accountNonLocked, boolean credentialsNonExpired,
-			boolean enabled) {
+			String password) {
 		super();
 		this.name = name;
 		this.lastName = lastName;
@@ -115,10 +101,10 @@ public class User implements UserDetails, Serializable{
 		this.events = events;
 		this.username = username;
 		this.password = password;
-		this.accountNonExpired = accountNonExpired;
-		this.accountNonLocked = accountNonLocked;
-		this.credentialsNonExpired = credentialsNonExpired;
-		this.enabled = enabled;
+		this.accountNonExpired = true;
+		this.accountNonLocked = true;
+		this.credentialsNonExpired = true;
+		this.enabled = true;
 	}
 
 	public long getId() {
