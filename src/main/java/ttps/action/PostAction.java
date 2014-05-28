@@ -104,7 +104,7 @@ public class PostAction extends ActionSupport{
 	public String edit() {
 		categories = categoryService.findAll();
 		post = postService.findOne(idPost);
-		tagStrings = tagsToString();
+		//tagStrings = tagsToString();
         return SUCCESS;
 	}
 	

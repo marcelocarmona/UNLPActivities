@@ -27,6 +27,11 @@
 					<td><s:property value="category" /></td>
 
 					<sec:authorize access="hasAnyRole('ADMIN','MODERATOR')">
+						<td><s:url id="editURL" action="edit">
+								<s:param name="idEvent" value="%{id}"></s:param>
+							</s:url> <s:a href="%{editURL}">Edit</s:a>
+						</td>
+							
 						<td><s:url id="deleteURL" action="delete">
 								<s:param name="idEvent" value="%{id}"></s:param>
 							</s:url> <s:a href="%{deleteURL}">Delete</s:a></td>

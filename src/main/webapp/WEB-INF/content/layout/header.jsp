@@ -124,8 +124,15 @@ html,body {
 								<li><a href="${pageContext.request.contextPath}/category/list">list</a></li>
 							</ul>
 						</li>
-
-
+						<sec:authorize access="isAnonymous()">
+						<li class="dropdown">
+							<a 	href="${pageContext.request.contextPath}/user/register" 
+								>
+								Sign in
+								
+							</a>
+						</li>
+						</sec:authorize>
 					</ul>
 					<form class="navbar-form navbar-left" role="search">
 						<div class="form-group">

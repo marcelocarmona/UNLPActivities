@@ -80,6 +80,7 @@ public class EventAction extends ActionSupport {
 	@Action("edit")
 	public String edit() {
 		setCategories(categoryService.findAll());
+		setEvent(eventService.findOne(idEvent));
         return SUCCESS;
 	}
 	

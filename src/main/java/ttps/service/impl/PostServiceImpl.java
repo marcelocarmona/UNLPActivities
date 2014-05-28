@@ -63,7 +63,7 @@ public class PostServiceImpl implements PostService {
 
 	public Post findOne(Long id) {
 		Post post=postRepository.findOne(id);
-		post.setComments(commentRepository.findByPost(post));
+//		post.setComments(commentRepository.findByPost(post));
 		return post;
 	}
 

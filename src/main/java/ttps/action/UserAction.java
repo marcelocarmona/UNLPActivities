@@ -99,13 +99,29 @@ public class UserAction extends ActionSupport {
 		user = userService.save(user);
 		return SUCCESS;
 	}
+	
+	@Action(value = "saveGuest")
+	public String saveGuest(){
+		user.setRole(Role.GUEST);
+		System.out.println(user.getUsername()+user.getPassword()+user.getRole());
+		user = userService.save(user);
+		return SUCCESS;
+	}
+	
 
 	@Action(value = "delete", results = { @Result(name = SUCCESS, location = "list", type = "redirect") })
 	public String delete() {
 		userService.delete(id);
 		return SUCCESS;
 	}
-
+	
+	@Action(value = "register" )
+	public String register() {
+		return SUCCESS;
+	}
+	
+	
+	
 	//TODO refactoring JRS-303
 	public void validate(){
 		if(user != null){

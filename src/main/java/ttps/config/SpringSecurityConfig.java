@@ -64,10 +64,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
          	.antMatchers("/tagsinputs/**").permitAll()
          	.antMatchers("/index").permitAll()
 			.antMatchers("/").permitAll()
+			.antMatchers("/user/register**").permitAll()
 			.antMatchers("/login**").permitAll()
 			.antMatchers("/logout*").permitAll()
 			.antMatchers("/listUser*").hasAuthority("ADMIN")
-			.anyRequest().authenticated()
+//			.anyRequest().authenticated()
 			.and()
          .formLogin()
              .permitAll();

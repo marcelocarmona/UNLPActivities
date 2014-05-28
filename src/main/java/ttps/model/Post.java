@@ -1,7 +1,6 @@
 package ttps.model;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,8 +16,8 @@ public class Post extends AbstractPublic {
 
 	private static final long serialVersionUID = 1L;
 
-	@OneToMany(mappedBy = "post", cascade = CascadeType.DETACH)
-	private List<Comment> comments;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "post", cascade = CascadeType.DETACH)
+	private Set<Comment> comments = new HashSet<>();
 
 	private String content;
 
@@ -42,11 +41,11 @@ public class Post extends AbstractPublic {
 	public Post() {
 	}
 
-	public List<Comment> getComments() {
+	public Set<Comment> getComments() {
 		return comments;
 	}
 
-	public void setComments(List<Comment> comments) {
+	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
 	}
 
