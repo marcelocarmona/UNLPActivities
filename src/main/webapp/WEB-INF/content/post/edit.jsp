@@ -4,30 +4,38 @@
 
 <jsp:include  page="/WEB-INF/content/layout/header.jsp" />
 
+<div class="panel panel-default">
+	<div class="panel-body">
+		<s:form action="save" method="post" theme="bootstrap"
+			cssClass="form-horizontal" label="Post">
+			<s:hidden name="post.user.id" value="1" />
 
-	<s:form action="save" method="post" theme="bootstrap"
-		cssClass="form-horizontal" label="Crea un nuevo Post">
-		<s:hidden name="post.user.id" value="1"/>
-		
-		<s:textfield name="post.title" label="Título" />
-		<s:textfield name="post.description" label="Descripción" />
-		
-		<s:select  name="post.category.id" label="Categoría"
-				headerKey="-1" headerValue="Selecciona una Categoría"
-				list="categories" listKey="id" listValue="name" /> 
-		
-		<s:textarea name="post.content" label="Contenido" cols="80" rows="20"/>
-		
-		<s:textfield name="tagString1" label="Tag 1"  />
-		<s:textfield name="tagString2" label="Tag 2"  />
-		<s:textfield name="tagString3" label="Tag 3"  />
-		<s:textfield name="tagString4" label="Tag 4"  />
-		
-		<s:checkbox name="post.privacity" label="Privado?" />
-		
-		<s:submit value="Guardar" />
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-	</s:form>
-	
+			<s:textfield name="post.title" label="Title" />
+			<s:textfield name="post.description" label="Description" />
+
+			<s:select name="post.category.id" label="Category"
+				list="categories" listKey="id" listValue="name" />
+
+			<s:textarea name="post.content" label="Content" cols="80" rows="20" />
+
+			<s:textfield label="Tags" name="tagStrings" data-role="tagsinput"
+				placeholder="Add tags" />
+
+			<s:checkbox name="post.privacity" label="Privado?" />
+
+			<s:submit value="Save" cssClass="btn btn-primary btn-block" />
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</s:form>
+	</div>
+</div>
+
+<!-- js and css inputtag -->
+<!-- http://timschlechter.github.io/bootstrap-tagsinput/examples/ -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/tagsinput/bootstrap-tagsinput.css" media="screen" />
+<script src="${pageContext.request.contextPath}/tagsinput/bootstrap-tagsinput-angular.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/tagsinput/bootstrap-tagsinput.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/tagsinput/bootstrap-tagsinput.js" type="text/javascript"></script>
+
 
 <jsp:include page="/WEB-INF/content/layout/footer.jsp" />

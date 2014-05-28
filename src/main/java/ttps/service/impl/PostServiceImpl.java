@@ -12,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ttps.model.Post;
 import ttps.model.Tag;
+import ttps.repository.CommentRepository;
 import ttps.repository.PostRepository;
 import ttps.repository.TagRepository;
 import ttps.service.PostService;
 
 @Service
-@Transactional(readOnly = true)
 public class PostServiceImpl implements PostService {
 
 	@Resource
@@ -25,6 +25,9 @@ public class PostServiceImpl implements PostService {
 
 	@Resource
 	private TagRepository tagRepository;
+	
+	@Resource
+	private CommentRepository commentRepository;
 
 	public long count() {
 		return postRepository.count();
@@ -59,7 +62,9 @@ public class PostServiceImpl implements PostService {
 	}
 
 	public Post findOne(Long id) {
-		return postRepository.findOne(id);
+		Post post=postRepository.findOne(id);
+		post.setComments(commentRepository.findByPost(post));
+		return post;
 	}
 
 	public void flush() {
@@ -70,8 +75,8 @@ public class PostServiceImpl implements PostService {
 		return postRepository.save(arg0);
 	}
 
-	public <S extends Post> S save(S entity) {
-		return postRepository.save(entity);
+	public <S extends Post> S save(S post) {
+		return postRepository.save(post);
 	}
 
 	public Post saveAndFlush(Post arg0) {
@@ -94,41 +99,20 @@ public class PostServiceImpl implements PostService {
 		postRepository.deleteAll();
 	}
 
-	
-	public void saveWithTags(Post post) {
-
-
-	}
-
-	/* (non-Javadoc)
-	 * @see ttps.service.PostService#savePostWithTags(ttps.model.Post, java.lang.String[])
-	 */
 	@Override
-	@Transactional(readOnly = false)
 	public void savePostWithTags(Post post, String... tagStrings) {
+		
 		for (String string : tagStrings) {
-			
-			if(string == null)System.out.println("----> ES Nuloooooooooooo");
-			else if (string == "") System.out.println("--------> Esta vacio");
-			System.out.println("--->"+string);
 			Tag tag = tagRepository.findByName(string);
 			if (tag == null) {
 				tag = new Tag();
 				tag.setName(string);
+				tagRepository.save(tag); //save transienst tag
 			}
 			post.getTags().add(tag);
 		}
 		postRepository.save(post);
-		
-//		Tag tag = tagRepository.findByName("tag2");
-//		if (tag == null) {
-//			tag = new Tag();
-//			tag.setName("tag2");
-//		}
-//		System.out.println("---------------->" + tag.getId());
-//		post.getTags().add(tag);
-//		// tag.getPosts().add(post);
-//		postRepository.save(post);
+
 	}
 
 }

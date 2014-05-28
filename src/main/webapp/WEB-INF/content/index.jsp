@@ -5,6 +5,10 @@
 
 <jsp:include page="layout/header.jsp" />
 
+
+${session["SPRING_SECURITY_CONTEXT"]}
+
+
 <h3>Index de Prueba</h3>
 
 <br />Desde un JSP

@@ -15,111 +15,83 @@ import ttps.repository.CategoryRepository;
 import ttps.service.CategoryService;
 
 @Service
-@Transactional(readOnly = true)
 public class CategoryServiceImpl implements CategoryService {
 
 	@Resource
 	private CategoryRepository categoryRepository;
 
-	@Override
-	public List<Category> findAll() {
-		return categoryRepository.findAll();
+	public Category findByName(String name) {
+		return categoryRepository.findByName(name);
 	}
 
-	@Override
-	public List<Category> findAll(Sort sort) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Category> findAll(Iterable<Long> ids) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <S extends Category> List<S> save(Iterable<S> entities) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void flush() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Category saveAndFlush(Category entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteInBatch(Iterable<Category> entities) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deleteAllInBatch() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Page<Category> findAll(Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
+	@Transactional(readOnly=false)
 	public <S extends Category> S save(S entity) {
 		return categoryRepository.save(entity);
 	}
 
-	@Override
+	public Page<Category> findAll(Pageable pageable) {
+		return categoryRepository.findAll(pageable);
+	}
+
 	public Category findOne(Long id) {
 		return categoryRepository.findOne(id);
 	}
 
-	@Override
 	public boolean exists(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		return categoryRepository.exists(id);
 	}
 
-	@Override
 	public long count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return categoryRepository.count();
 	}
 
-	@Override
+	@Transactional(readOnly=false)
 	public void delete(Long id) {
 		categoryRepository.delete(id);
 	}
 
-	@Override
 	public void delete(Category entity) {
 		categoryRepository.delete(entity);
 	}
 
-	@Override
 	public void delete(Iterable<? extends Category> entities) {
-		// TODO Auto-generated method stub
-
+		categoryRepository.delete(entities);
 	}
 
-	@Override
 	public void deleteAll() {
 		categoryRepository.deleteAll();
 	}
 
-	@Override
-	public Category findByName(String name) {
-		return categoryRepository.findByName(name);
+	public void deleteAllInBatch() {
+		categoryRepository.deleteAllInBatch();
+	}
+
+	public void deleteInBatch(Iterable<Category> arg0) {
+		categoryRepository.deleteInBatch(arg0);
+	}
+
+	public List<Category> findAll() {
+		return categoryRepository.findAll();
+	}
+
+	public List<Category> findAll(Iterable<Long> arg0) {
+		return categoryRepository.findAll(arg0);
+	}
+
+	public List<Category> findAll(Sort arg0) {
+		return categoryRepository.findAll(arg0);
+	}
+
+	public void flush() {
+		categoryRepository.flush();
+	}
+
+	public <S extends Category> List<S> save(Iterable<S> arg0) {
+		return categoryRepository.save(arg0);
+	}
+
+	public Category saveAndFlush(Category arg0) {
+		return categoryRepository.saveAndFlush(arg0);
 	}
 
 }

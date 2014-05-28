@@ -11,14 +11,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import ttps.model.User;
 import ttps.repository.UserRepository;
 import ttps.service.UserService;
 
 @Service
-@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService, UserDetailsService  {
 
 	@Resource
@@ -125,5 +123,10 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
 			throws UsernameNotFoundException {
 		return findByUsername(username);
 	}
+
+//	public List<User> findModerators() {
+//		return userRepository.findModerators();
+//	}
+
 
 }

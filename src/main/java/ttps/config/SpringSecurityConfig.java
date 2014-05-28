@@ -61,6 +61,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
          .authorizeRequests()
          	//authorizeRequests for css and javascript bootstrap
          	.antMatchers("/struts/**").permitAll()
+         	.antMatchers("/tagsinputs/**").permitAll()
          	.antMatchers("/index").permitAll()
 			.antMatchers("/").permitAll()
 			.antMatchers("/login**").permitAll()

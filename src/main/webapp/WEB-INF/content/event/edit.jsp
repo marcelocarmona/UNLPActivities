@@ -1,12 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="sb" uri="/struts-bootstrap-tags"%>
+<%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
 
-</body>
-</html>
+<jsp:include page="/WEB-INF/content/layout/header.jsp" />
+
+<div class="panel panel-default">
+	<div class="panel-body">
+		<s:form action="save" method="post" theme="bootstrap"
+			cssClass="form-horizontal" label="Event">
+			<s:textfield name="event.title" label="Título" />
+			<s:textfield name="event.description" label="Descripción" />
+			<s:textfield name="event.place" label="Lugar" />
+			<%-- 		<s:date name="event.date"  /> --%>
+			<s:select name="event.category.id" label="Categoría"
+				list="categories" listKey="id" listValue="name" />
+
+			<s:submit value="Save" cssClass="btn btn-primary btn-block" />
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</s:form>
+	</div>
+</div>
+<jsp:include page="/WEB-INF/content/layout/footer.jsp" />

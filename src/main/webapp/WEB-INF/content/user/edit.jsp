@@ -39,13 +39,13 @@
  		
  		<sj:datepicker 
              name="user.birthday"
-             value="%{user.birthday}"
              parentTheme="bootstrap" 
              label="Birthday" 
              tooltip="Select a date" 
              cssClass="form-control" 
              elementCssClass="col-sm-5" 
-             showOn="focus" 
+             showOn="focus"
+             displayFormat="dd/mm/yy" 
              inputAppendIcon="calendar"/> 
 
 			
@@ -85,10 +85,12 @@
 		<s:checkbox 
 			name="user.enabled" 
 			label="Enabled: " />
-		
+			
+			<div class="highlight">
 		<s:submit 
 			value="Save" 
-			cssClass="btn btn-primary" />
+			cssClass="btn btn-primary btn-block" />
+			</div>
 		
 		<input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}" />

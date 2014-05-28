@@ -3,6 +3,7 @@ package ttps.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,7 +46,7 @@ public class User implements UserDetails, Serializable{
 	@Column(unique = true, nullable = false)
 	private String mail;
 
-	private String birthday;
+	private Date birthday;
 	
 	private String nationality;
 	
@@ -78,14 +79,14 @@ public class User implements UserDetails, Serializable{
 	
 
 	public User(String name, String lastName, Gender gender, String mail,
-			String birthday, String nationality, String profession, Role role,
+			Date birthday, String nationality, String profession, Role role,
 			String username,
 			String password) {
 		this(name,lastName,gender,mail,birthday,nationality,profession,role,new ArrayList<Post>(),new ArrayList<Event>(),username,password);
 	}
 
 	public User(String name, String lastName, Gender gender, String mail,
-			String birthday, String nationality, String profession, Role role,
+			Date birthday, String nationality, String profession, Role role,
 			List<Post> posts, List<Event> events, String username,
 			String password) {
 		super();
@@ -157,11 +158,11 @@ public class User implements UserDetails, Serializable{
 		this.mail = mail;
 	}
 
-	public String getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 

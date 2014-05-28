@@ -19,9 +19,13 @@ public class Comment implements Serializable{
 	@Id @GeneratedValue
 	private long id;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name="id_post")
 	private Post post;
+	
+	@ManyToOne(cascade = CascadeType.DETACH)
+	@JoinColumn(name="id_user")
+	private User user;
 
 	private String content;
 	
@@ -50,5 +54,13 @@ public class Comment implements Serializable{
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

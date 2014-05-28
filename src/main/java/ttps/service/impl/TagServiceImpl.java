@@ -7,14 +7,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import ttps.model.Tag;
 import ttps.repository.TagRepository;
 import ttps.service.TagService;
 
 @Service
-@Transactional(readOnly = true)
 public class TagServiceImpl implements TagService {
 
 	@Autowired

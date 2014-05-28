@@ -8,14 +8,17 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.opensymphony.xwork2.ActionSupport;
-
 import ttps.model.Category;
+import ttps.model.Comment;
 import ttps.model.Post;
 import ttps.model.Tag;
 import ttps.model.User;
 import ttps.service.CategoryService;
 import ttps.service.PostService;
+import ttps.service.CommentService;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 
 
 
@@ -25,18 +28,24 @@ public class PostAction extends ActionSupport{
 	private static final long serialVersionUID = 1L;
 	@Autowired private PostService postService;
 	@Autowired private CategoryService categoryService;
+	@Autowired private CommentService commentService;
 	private long idPost;
 	private Post post;
 	private List<Category> categories;
 	private List<Post> posts;
-	private String tagString1;
-	private String tagString2;
-	private String tagString3;
-	private String tagString4;
-	
+	private String tagStrings;
+	private Comment comment;
 
 	//Getter and setters
 
+	public Comment getComment() {
+		return comment;
+	}
+
+	public void setComment(Comment comment) {
+		this.comment = comment;
+	}
+	
 	public long getIdPost() {
 		return idPost;
 	}
@@ -69,36 +78,12 @@ public class PostAction extends ActionSupport{
 		this.posts = posts;
 	}
 	
-	public String getTagString1() {
-		return tagString1;
+	public String getTagStrings() {
+		return tagStrings;
 	}
 
-	public void setTagString1(String tagString1) {
-		this.tagString1 = tagString1;
-	}
-
-	public String getTagString2() {
-		return tagString2;
-	}
-
-	public void setTagString2(String tagString2) {
-		this.tagString2 = tagString2;
-	}
-
-	public String getTagString3() {
-		return tagString3;
-	}
-
-	public void setTagString3(String tagString3) {
-		this.tagString3 = tagString3;
-	}
-
-	public String getTagString4() {
-		return tagString4;
-	}
-
-	public void setTagString4(String tagString4) {
-		this.tagString4 = tagString4;
+	public void setTagStrings(String tagStrings) {
+		this.tagStrings = tagStrings;
 	}
 
 	//Actions	
@@ -109,9 +94,17 @@ public class PostAction extends ActionSupport{
         return SUCCESS;
 	}
 	
+	@Action("view")
+	public String view() {
+		post = postService.findOne(idPost);
+		return SUCCESS;
+	}
+	
 	@Action("edit")
 	public String edit() {
-		setCategories(categoryService.findAll());
+		categories = categoryService.findAll();
+		post = postService.findOne(idPost);
+		tagStrings = tagsToString();
         return SUCCESS;
 	}
 	
@@ -124,25 +117,40 @@ public class PostAction extends ActionSupport{
 		u.setId(3);
 		post.setUser(u);
 		
-//		Tag tag = tagService.findByName("tag1");
-//		if(tag == null){
-//			tag = new Tag();
-//			tag.setName("tag1");
-//		}
-//		
-//		post.getTags().add(tag);
-//		tag.getPosts().add(post);
-//		postService.save(post);
+		//parcing tagStrings and creates tags
+		String[] tagNames = tagStrings.split(",");
 		
-		postService.savePostWithTags(post,tagString1,tagString2,tagString3,tagString4);
+		//custom save
+		postService.savePostWithTags(post,tagNames);
+
         return SUCCESS;
 	}
 	
 
 	@Action(value = "delete", results = { @Result(name = SUCCESS, location = "list", type = "redirect") })
 	public String deletePost() {
+		System.out.println("delete"+"delete     "+idPost);
 		postService.delete(idPost);
 		return SUCCESS;
+	}
+
+
+	@Action(value = "saveComment", results = { 
+			@Result(name = SUCCESS, location = "list", type = "redirect"),//view?idPost=229377
+			@Result(name = "input", location = "edit.jsp")})
+	public String saveComment() {
+		comment.setUser(((User) ((org.springframework.security.core.context.SecurityContext) ActionContext.getContext().getSession().get("SPRING_SECURITY_CONTEXT")).getAuthentication().getPrincipal()));
+		commentService.save(comment);
+        return SUCCESS;
+	}
+	
+	//parcing tags to a string
+	private String tagsToString(){
+		String stringTag="";
+		for (Tag tag : post.getTags()) {
+		 stringTag = stringTag.concat(tag.getName()).concat(",");
+		}
+		return stringTag;
 	}
 	
 	

@@ -2,14 +2,20 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sb" uri="/struts-bootstrap-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<title>UNLP Activities</title>
 <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
 <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
 <sj:head  />
 <sb:head />
 <style type="text/css">
@@ -45,13 +51,6 @@ html,body {
 
 .container .text-muted {
 	margin: 20px 0;
-}
-
-/* CSS solo para esta entrega  ******************REFACTORING********************
--------------------------------------------------- */
-.label {
-	color: black;
-	font-size: 14px;
 }
 
 </style>
@@ -110,8 +109,8 @@ html,body {
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#">list</a></li>
-								<li><a href="#">create</a></li>
+								<li><a href="${pageContext.request.contextPath}/event/list">list</a></li>
+								<li><a href="${pageContext.request.contextPath}/event/edit">create</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -122,8 +121,7 @@ html,body {
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#">list</a></li>
-								<li><a href="#">create</a></li>
+								<li><a href="${pageContext.request.contextPath}/category/list">list</a></li>
 							</ul>
 						</li>
 
@@ -136,12 +134,27 @@ html,body {
 						<button type="submit" class="btn btn-default">Submit</button>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
+					<li>
 						<s:if test="%{#session.SPRING_SECURITY_CONTEXT.authentication.authenticated}">
-							<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+							<li class="dropdown">
+								<a 	href="#" 
+									class="dropdown-toggle"
+									data-toggle="dropdown">
+									<i class="glyphicon glyphicon-user"></i>
+									<s:property value="#session.SPRING_SECURITY_CONTEXT.authentication.principal.name" />
+									<b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="${pageContext.request.contextPath}/event/list">Perfil</a></li>
+									<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+								</ul>
+							</li>
+
 						</s:if>
 						<s:else>
 						    <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
 						</s:else>
+						</li>
 					</ul>
 				</div>
 				<!-- /.navbar-collapse -->

@@ -1,30 +1,30 @@
 package ttps.model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Post extends AbstractPublic {
-	// @Id @GeneratedValue
-	// private int id_post;
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
-	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "post", cascade = CascadeType.DETACH)
 	private List<Comment> comments;
 
 	private String content;
 
 	private boolean privacity;
 
-	@ManyToMany(fetch = FetchType.EAGER , cascade =  { CascadeType.ALL} )
+	@ManyToMany(fetch = FetchType.EAGER )
 	private Set<Tag> tags = new HashSet<>();
 
 	@ManyToOne(cascade = CascadeType.DETACH)

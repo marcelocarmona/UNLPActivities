@@ -8,7 +8,7 @@
 			<p class="text-muted">
 				TTPS 2014 - UNLP - Carmona Marcelo - Di Criscio Gastón
 				<span class="pull-right">
-					<a href="https://github.com/mclo/UNLPActivities.git">GitHub</a>
+					<a target="_blank" href="https://github.com/mclo/UNLPActivities.git">GitHub</a>
 				</span>
 			</p>
 
