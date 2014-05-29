@@ -7,20 +7,17 @@
 
 <div class="panel panel-default">
 	<div class="panel-body">
-		<s:form action="save" method="post" theme="bootstrap"
+		<s:form action="create-processing" method="post" theme="bootstrap"
 			cssClass="form-horizontal" label="Post">
+<%-- 			<s:hidden name="post.id" /> --%>
 			
-			<!--  hiddens que se tienen que mantener -->
-			<s:hidden name="post.id" />
-			<s:hidden name="post.user.id" />
+<%-- 			<s:hidden name="post.user.id" value="2" /> --%>
 
 			<s:textfield name="post.title" label="Title" />
 			<s:textfield name="post.description" label="Description" />
 
 			<s:select name="post.category.id" label="Category" 
 				list="categories" listKey="id" listValue="name" />
-				
-<%-- 	<s:textfield name="post.category.id" label="categories" /> --%>
 	
 			<s:textarea name="post.content" label="Content" cols="80" rows="20" />
 

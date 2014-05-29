@@ -11,6 +11,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
+
 @Entity
 public class Post extends AbstractPublic {
 
@@ -19,6 +22,7 @@ public class Post extends AbstractPublic {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "post", cascade = CascadeType.DETACH)
 	private Set<Comment> comments = new HashSet<>();
 
+	
 	private String content;
 
 	private boolean privacity;
@@ -26,7 +30,7 @@ public class Post extends AbstractPublic {
 	@ManyToMany(fetch = FetchType.EAGER )
 	private Set<Tag> tags = new HashSet<>();
 
-	@ManyToOne(cascade = CascadeType.DETACH)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	@JoinColumn(name = "id_user")
 	private User user;
 
@@ -34,6 +38,7 @@ public class Post extends AbstractPublic {
 		return user;
 	}
 
+//	@RequiredStringValidator(message = "El post debe tener un usuario como dueño")
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -69,6 +74,8 @@ public class Post extends AbstractPublic {
 		return content;
 	}
 
+	@RequiredStringValidator(message = "Se debe ingresar un contenido")
+	@StringLengthFieldValidator(minLength = "10", message = "El contenido debe tener almenos 10 caracteres")
 	public void setContent(String content) {
 		this.content = content;
 	}

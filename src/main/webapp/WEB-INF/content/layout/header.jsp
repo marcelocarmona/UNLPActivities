@@ -53,6 +53,19 @@ html,body {
 	margin: 20px 0;
 }
 
+/* Bootstrap rewrite
+-------------------------------------------------- */
+.help-block {
+display: block;
+margin-top: 5px;
+margin-bottom: 10px;
+padding: 5px;
+color: #737373;
+border: 1px solid transparent;
+border-radius: 4px;
+}
+}
+
 </style>
 </head>
 <body>
@@ -126,7 +139,7 @@ html,body {
 						</li>
 						<sec:authorize access="isAnonymous()">
 						<li class="dropdown">
-							<a 	href="${pageContext.request.contextPath}/user/register" 
+							<a 	href="${pageContext.request.contextPath}/register" 
 								>
 								Sign in
 								
@@ -170,3 +183,7 @@ html,body {
 
 
 		<div class="container">
+		
+	<s:actionerror theme="bootstrap" />
+	<s:actionmessage theme="bootstrap" />
+	<s:fielderror theme="bootstrap" />

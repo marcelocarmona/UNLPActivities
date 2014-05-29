@@ -43,7 +43,7 @@ public class User implements UserDetails, Serializable{
 	@Enumerated
 	private Gender gender;
 	
-	@Column(unique = true, nullable = false)
+	@Column(unique = true)
 	private String mail;
 
 	private Date birthday;

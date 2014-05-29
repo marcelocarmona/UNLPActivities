@@ -14,8 +14,8 @@
 		cssClass="form-horizontal " label="User Form">
 		
 		<s:textfield 
-			name="user.name" 
-			label="Name" 
+			name="user.username" 
+			label="User Name" 
 			tooltip="Enter your name here" />
 			
 			<s:password name="user.password"

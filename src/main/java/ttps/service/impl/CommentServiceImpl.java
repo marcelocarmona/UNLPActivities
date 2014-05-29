@@ -1,6 +1,7 @@
 package ttps.service.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -20,7 +21,7 @@ public class CommentServiceImpl implements CommentService {
 	@Resource
 	private CommentRepository commentRepository;
 
-	public List<Comment> findByPost(Post post) {
+	public Set<Comment> findByPost(Post post) {
 		return commentRepository.findByPost(post);
 	}
 

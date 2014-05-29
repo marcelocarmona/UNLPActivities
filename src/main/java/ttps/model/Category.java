@@ -30,6 +30,14 @@ public class Category implements Serializable{
 		this.name = name;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -44,14 +52,6 @@ public class Category implements Serializable{
 
 	public void setPublics(List<AbstractPublic> publics) {
 		this.publics = publics;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	@Override
