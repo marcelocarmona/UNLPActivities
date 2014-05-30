@@ -14,7 +14,7 @@
 				<th>Lugar</th>
 				<th>Fecha</th>
 				<th>Categoria</th>
-
+				<sec:authorize access="hasAnyRole('ADMIN','MODERATOR')"><th>Actions</th></sec:authorize>
 			</tr>
 		</thead>
 		<tbody>
@@ -29,12 +29,14 @@
 					<sec:authorize access="hasAnyRole('ADMIN','MODERATOR')">
 						<td><s:url id="editURL" action="edit">
 								<s:param name="idEvent" value="%{id}"></s:param>
-							</s:url> <s:a href="%{editURL}">Edit</s:a>
-						</td>
+							</s:url> <s:a href="%{editURL}"><i class="glyphicon glyphicon-edit" data-original-title="edit"></i></s:a>
+						
 							
-						<td><s:url id="deleteURL" action="delete">
+							<s:url id="deleteURL" action="delete">
 								<s:param name="idEvent" value="%{id}"></s:param>
-							</s:url> <s:a href="%{deleteURL}">Delete</s:a></td>
+							</s:url> <s:a href="%{deleteURL}"><i class="glyphicon glyphicon-trash" data-original-title="delete"></i></s:a>
+						</td>	
+					
 					</sec:authorize>
 				</tr>
 

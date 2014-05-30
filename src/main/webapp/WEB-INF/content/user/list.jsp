@@ -1,13 +1,14 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sb" uri="/struts-bootstrap-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <jsp:include  page="/WEB-INF/content/layout/header.jsp" />
 
 
 
 <div class="table-responsive panel panel-default">
-	<table class="table " >
+	<table class="table table-responsive " >
 		<thead>
 			<tr>
 				<th>Id</th>
@@ -19,8 +20,8 @@
 				<th>Birthday</th>
 				<th>nationality</th>
 				<th>profession</th>
-				<th>Actions</th>
 				<th>Role</th>
+				<sec:authorize access="hasRole('ADMIN')"><th>Actions</th></sec:authorize>
 			</tr>
 		</thead>
 		<tbody>
@@ -44,22 +45,18 @@
 						<s:url id="deleteURL" action="delete">
 							<s:param name="id"><s:property value="id" /></s:param>
 						</s:url> 
-						<s:url id="viewURL" action="view">
-							<s:param name="id"><s:property value="id" /></s:param>
-						</s:url>
+						<sec:authorize access="hasAnyRole('ADMIN')">
 							<div class="btn-group" >
-								<s:a href="%{editURL}" cssClass="btn btn-xs btn-default">Edit</s:a>
-								<s:a href="%{viewURL}" cssClass="btn btn-xs btn-default">View</s:a>
-								<s:a href="%{deleteURL}" cssClass="btn btn-xs btn-default">Delete</s:a>
+								<s:a href="%{deleteURL}"><i class="glyphicon glyphicon-trash" data-original-title="delete"></i></s:a>
+								<s:a href="%{editURL}"><i class="glyphicon glyphicon-edit" data-original-title="edit"></i></s:a>
 							</div>
+						</sec:authorize>
 					</td>
 				</tr>
 			</s:iterator>
 		</tbody>
 	</table>
 </div>
-	<s:url id="createURL" action="edit"/>
-	<s:a href="%{createURL}" cssClass="btn btn-primary">Create</s:a>
 
 
 <jsp:include page="/WEB-INF/content/layout/footer.jsp" />

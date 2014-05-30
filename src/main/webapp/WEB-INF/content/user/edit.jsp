@@ -1,12 +1,8 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sb" uri="/struts-bootstrap-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
-
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 <jsp:include  page="/WEB-INF/content/layout/header.jsp" />
-
-	<s:actionerror theme="bootstrap" />
-	<s:actionmessage theme="bootstrap" />
-	<s:fielderror theme="bootstrap" />
 
 <div class="panel panel-default">
 <div class="panel-body">
@@ -65,32 +61,36 @@
 			name="user.password" 
 			label="Password" />
 			
-		<s:radio 
-			name="user.role" 
-			label="Roles" 
-			list="roles" />
+		<sec:authorize access="hasRole('ADMIN')">
+		
+				<s:radio 
+					name="user.role" 
+					label="Roles" 
+					list="roles" />
+					
+				<s:checkbox 
+					name="user.accountNonExpired" 
+					label="Account Non Expired" />
+					
+				<s:checkbox 
+					name="user.accountNonLocked" 
+					label="Account Non Locked" />
+					
+				<s:checkbox 
+					name="user.credentialsNonExpired"
+					label="Credentials Non Expired" />
+					
+				<s:checkbox 
+					name="user.enabled" 
+					label="Enabled: " />
+					
+		</sec:authorize>
+
 			
-		<s:checkbox 
-			name="user.accountNonExpired" 
-			label="Account Non Expired" />
-			
-		<s:checkbox 
-			name="user.accountNonLocked" 
-			label="Account Non Locked" />
-			
-		<s:checkbox 
-			name="user.credentialsNonExpired"
-			label="Credentials Non Expired" />
-			
-		<s:checkbox 
-			name="user.enabled" 
-			label="Enabled: " />
-			
-			<div class="highlight">
 		<s:submit 
 			value="Save" 
 			cssClass="btn btn-primary btn-block" />
-			</div>
+
 		
 		<input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}" />

@@ -1,7 +1,5 @@
 package ttps.service;
 
-import java.util.List;
-
 import ttps.model.Post;
 import ttps.repository.PostRepository;
 

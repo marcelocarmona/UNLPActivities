@@ -4,23 +4,17 @@
 
 <jsp:include  page="/WEB-INF/content/layout/header.jsp" />
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('i').tooltip();
-	});
-</script>
+
 
 <div class="panel panel-default">
 <div class="panel-heading">
-	<s:form id="filter-form" action="filter-processing" method="post" theme="bootstrap"
-		label="Filter">
+	<s:form id="filter-form" action="filter-processing" method="post" theme="bootstrap">
 		
-		<s:select name="idCategory" label="Category" 
+		<s:select name="idCategory" label="Category Filter" 
 		list="categories" listKey="id" listValue="name" onchange="this.form.submit()"/>
 
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	</s:form>
-
 
 </div>
 	<div class="list-group">
@@ -35,8 +29,10 @@
 					<s:param name="idPost"><s:property value="id" /></s:param>
 				</s:url>
 			<div class="list-group-item">
-				<s:a href="%{deleteURL}"><i class="glyphicon glyphicon-trash" data-original-title="delete"></i></s:a>
-				<s:a href="%{editURL}"><i class="glyphicon glyphicon-edit" data-original-title="edit"></i></s:a>
+				<sec:authorize access="hasAnyRole('ADMIN','MODERATOR')">
+					<s:a href="%{deleteURL}"><i class="glyphicon glyphicon-trash" data-original-title="delete"></i></s:a>
+					<s:a href="%{editURL}"><i class="glyphicon glyphicon-edit" data-original-title="edit"></i></s:a>
+				</sec:authorize>
 				<s:a href="%{viewURL}"><s:property value="title"/></s:a>
 				
 				<span class="badge"><s:property value="category" /></span>

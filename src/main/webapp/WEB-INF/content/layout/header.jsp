@@ -89,19 +89,6 @@ border-radius: 4px;
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav">
-
-						<li class="dropdown">
-							<a 	href="#" 
-								class="dropdown-toggle"
-								data-toggle="dropdown">
-								Users
-								<b class="caret"></b>
-							</a>
-							<ul class="dropdown-menu">
-								<li><a href="${pageContext.request.contextPath}/user/list">list</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/edit">create</a></li>
-							</ul>
-						</li>
 						<li class="dropdown">
 							<a 	href="#" 
 								class="dropdown-toggle"
@@ -111,32 +98,41 @@ border-radius: 4px;
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href="${pageContext.request.contextPath}/post/list">list</a></li>
-								<li><a href="${pageContext.request.contextPath}/post/create">create</a></li>
+								<sec:authorize access="hasAnyRole('ADMIN','MODERATOR','STUDENT')"><li><a href="${pageContext.request.contextPath}/post/create">create</a></li></sec:authorize>
 							</ul>
 						</li>
-						<li class="dropdown">
-							<a 	href="#" 
-								class="dropdown-toggle"
-								data-toggle="dropdown">
-								Events
-								<b class="caret"></b>
-							</a>
-							<ul class="dropdown-menu">
-								<li><a href="${pageContext.request.contextPath}/event/list">list</a></li>
-								<li><a href="${pageContext.request.contextPath}/event/edit">create</a></li>
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a 	href="#" 
-								class="dropdown-toggle"
-								data-toggle="dropdown">
-								Categories
-								<b class="caret"></b>
-							</a>
-							<ul class="dropdown-menu">
-								<li><a href="${pageContext.request.contextPath}/category/list">list</a></li>
-							</ul>
-						</li>
+						<sec:authorize access="hasAnyRole('ADMIN','MODERATOR','STUDENT')">
+							<li class="dropdown">
+								<a 	href="#" 
+									class="dropdown-toggle"
+									data-toggle="dropdown">
+									Events
+									<b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="${pageContext.request.contextPath}/event/list">list</a></li>
+									<li><a href="${pageContext.request.contextPath}/event/edit">create</a></li>
+								</ul>
+							</li>
+						</sec:authorize>
+						<sec:authorize access="hasAnyRole('ADMIN','MODERATOR')">
+							<li>
+								<a href="${pageContext.request.contextPath}/category/list">Categories</a>
+							</li>
+						
+							<li class="dropdown">
+								<a 	href="#" 
+									class="dropdown-toggle"
+									data-toggle="dropdown">
+									Users
+									<b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="${pageContext.request.contextPath}/user/list">list</a></li>
+									<sec:authorize access="hasRole('ADMIN')"><li><a href="${pageContext.request.contextPath}/user/edit">create</a></li></sec:authorize>
+								</ul>
+							</li>
+						</sec:authorize>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<sec:authorize access="isAnonymous()">
@@ -160,7 +156,7 @@ border-radius: 4px;
 									<b class="caret"></b>
 								</a>
 								<ul class="dropdown-menu">
-									<li><a href="${pageContext.request.contextPath}/event/list">Perfil</a></li>
+									<li><a href="${pageContext.request.contextPath}/user/edit.action?id=${session.SPRING_SECURITY_CONTEXT.authentication.principal.id}">Perfil</a></li>
 									<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 								</ul>
 							</li>
@@ -182,3 +178,9 @@ border-radius: 4px;
 	<s:actionerror theme="bootstrap" />
 	<s:actionmessage theme="bootstrap" />
 	<s:fielderror theme="bootstrap" />
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('i').tooltip();
+	});
+	</script>

@@ -121,6 +121,8 @@ public class UserAction extends ActionSupport {
 				addFieldError("user.lastName","Se requiere un apellido");
 			if (user.getPassword().equals(""))
 				addFieldError("user.password", "Se requiere una contraseña");
+			if (user.getRole() == null)
+				addFieldError("user.role", "Se requiere un rol");
 		}
 	}
 

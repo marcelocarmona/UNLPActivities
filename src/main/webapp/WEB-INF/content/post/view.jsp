@@ -16,11 +16,13 @@
 
 
 <div class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">
-			<s:property value="post.title" />
-		</h3>
-	</div>
+<ul class="list-group panel-title">
+  <li class="list-group-item">
+    <span class="badge"><s:property value="post.user.name" /></span>
+    <s:property value="post.title" />
+  </li>
+</ul>
+
 	<div class="panel-body">
 		<s:property value="post.content" />
 	</div>

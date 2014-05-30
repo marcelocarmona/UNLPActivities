@@ -13,9 +13,6 @@ import ttps.service.CategoryService;
 import ttps.service.PostService;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.Preparable;
-import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
-import com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator;
 
 @Namespace("/post")
 public class FilterProcessingAction extends ActionSupport {
