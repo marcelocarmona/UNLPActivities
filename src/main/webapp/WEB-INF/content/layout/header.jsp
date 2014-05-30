@@ -156,7 +156,7 @@ border-radius: 4px;
 									<b class="caret"></b>
 								</a>
 								<ul class="dropdown-menu">
-									<li><a href="${pageContext.request.contextPath}/user/edit.action?id=${session.SPRING_SECURITY_CONTEXT.authentication.principal.id}">Perfil</a></li>
+									<li><a href="${pageContext.request.contextPath}/user/perfil">Perfil</a></li>
 									<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 								</ul>
 							</li>

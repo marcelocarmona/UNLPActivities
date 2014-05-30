@@ -69,16 +69,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/user/register**").permitAll()
 			.antMatchers("/login**").permitAll()
 			.antMatchers("/logout*").permitAll()
-			.antMatchers("/listUser*").hasAuthority("ADMIN")
+			.antMatchers("/logout*").permitAll()
+			.antMatchers("/post/view**").permitAll()
 			
 			
-			.antMatchers("/post/create**").hasAnyAuthority(	Role.ADMIN.getAuthority(),
-															Role.MODERATOR.getAuthority(),
-															Role.STUDENT.getAuthority())
-			
-			.antMatchers("/post/edit**").hasAnyAuthority(	Role.ADMIN.getAuthority(),
-															Role.MODERATOR.getAuthority(),
-															Role.STUDENT.getAuthority())
+//			.antMatchers("/post/create**").hasAnyAuthority(	Role.ADMIN.getAuthority(),
+//															Role.MODERATOR.getAuthority(),
+//															Role.STUDENT.getAuthority())
+//			
+//			.antMatchers("/post/edit**").hasAnyAuthority(	Role.ADMIN.getAuthority(),
+//															Role.MODERATOR.getAuthority(),
+//															Role.STUDENT.getAuthority())
 															
 //			.antMatchers("/post/create**").hasAuthority(Role.MODERATOR.getAuthority())
 //			.antMatchers("/post/create**").hasAuthority(Role.STUDENT.getAuthority())
@@ -87,7 +88,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 //			.antMatchers("/post/create-processing**").hasAuthority(Role.STUDENT.getAuthority())
 
 			
-//			.anyRequest().authenticated()
+			.anyRequest().permitAll()
 			.and()
          .formLogin()
              .permitAll();

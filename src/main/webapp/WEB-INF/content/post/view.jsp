@@ -9,19 +9,19 @@
 
 <s:if test="post.privacity">
 	<sec:authorize access="not isAuthenticated()">
-		<c:url var="loginUrl" value="login" />
+		<c:url var="loginUrl" value="../login" />
 		<c:redirect url="${loginUrl}"></c:redirect>
 	</sec:authorize>
 </s:if>
 
 
 <div class="panel panel-default">
-<ul class="list-group panel-title">
-  <li class="list-group-item">
-    <span class="badge"><s:property value="post.user.name" /></span>
+<div class="panel-heading">
+  <div class="">
     <s:property value="post.title" />
-  </li>
-</ul>
+    <span class="badge" style="float:right"><s:property value="post.user.username" /></span>
+  </div>
+</div>
 
 	<div class="panel-body">
 		<s:property value="post.content" />

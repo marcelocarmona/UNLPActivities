@@ -34,6 +34,8 @@
 					<s:a href="%{editURL}"><i class="glyphicon glyphicon-edit" data-original-title="edit"></i></s:a>
 				</sec:authorize>
 				<s:a href="%{viewURL}"><s:property value="title"/></s:a>
+
+				<s:if test="privacity"><i class="glyphicon glyphicon-lock" data-original-title="post privado"></i></s:if>
 				
 				<span class="badge"><s:property value="category" /></span>
 				

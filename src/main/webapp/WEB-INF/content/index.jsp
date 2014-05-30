@@ -22,6 +22,11 @@
 	</div>
 </div>
 
+<p> Guest: solo tiene permiso para ver post y comentar</p>
+<p> Student: pueden ver, crear, comentar post. crear y ver eventos</p>
+<p> Moderator: puede hacer todo menos modificar y/o crear usuarios</p>
+<p> Admin: tiene todos los permisos</p>
+
 
 <jsp:include page="layout/footer.jsp" />
 
