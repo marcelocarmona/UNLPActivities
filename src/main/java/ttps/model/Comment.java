@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
+
 @Entity
 public class Comment implements Serializable{
 	/**
@@ -44,6 +47,8 @@ public class Comment implements Serializable{
 		return content;
 	}
 
+	@RequiredStringValidator(message = "Se debe ingresar un contenido")
+	@StringLengthFieldValidator(minLength = "10", message = "El contenido debe tener almenos 10 caracteres")
 	public void setContent(String content) {
 		this.content = content;
 	}

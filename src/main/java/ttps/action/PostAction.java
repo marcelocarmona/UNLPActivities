@@ -99,75 +99,75 @@ public class PostAction extends ActionSupport implements Preparable,SessionAware
 	}
 
 	//Actions	
+//
+//	@Action("list")
+//	@SkipValidation
+//	public String list() {
+//		setPosts(postService.findAll());
+//        return SUCCESS;
+//	}
+	
+//	@Action("view")
+//	@SkipValidation
+//	public String view() {
+//		post = postService.findOne(idPost);
+//		return SUCCESS;
+//	}
+	
+//	@Action("edit")
+//	@SkipValidation
+//	public String edit() {
+//		post = postService.findOne(idPost);
+//		categories = categoryService.findAll();	
+//		tagStrings = tagsToString();
+//        return SUCCESS;
+//	}
+	
+//	@Action("create")
+//	@SkipValidation
+//	public String create() {
+//		return SUCCESS;
+//	}
+	
+//	@Action(value = "create-processing", results = {
+//			@Result(name = SUCCESS, location = "list", type = "redirect"),
+//			@Result(name = "input", location = "create.jsp")})
+//	public String createProcessing(){
+//		 //le agrego al post usuario de session
+//		post.setUser(sessionUser);
+//		
+//		//parcing tagStrings and creates tags
+//		String[] tagNames = tagStrings.split(",");
+//		
+//		//custom save
+//		postService.savePostWithTags(post,tagNames);
+//		return SUCCESS;
+//	}
+	
+	
+	
+//	@Action(value = "save", results = { 
+//			@Result(name = SUCCESS, location = "list", type = "redirect"),
+//			@Result(name = "input", location = "edit.jsp")})
+//	public String save() {System.out.println("entreo");
+//		
+//		//parcing tagStrings and creates tags
+//		String[] tagNames = tagStrings.split(",");
+//		
+//		//custom save
+//		postService.savePostWithTags(post,tagNames);
+//
+//        return SUCCESS;
+//	}
+	
 
-	@Action("list")
-	@SkipValidation
-	public String list() {
-		setPosts(postService.findAll());
-        return SUCCESS;
-	}
-	
-	@Action("view")
-	@SkipValidation
-	public String view() {
-		post = postService.findOne(idPost);
-		return SUCCESS;
-	}
-	
-	@Action("edit")
-	@SkipValidation
-	public String edit() {
-		post = postService.findOne(idPost);
-		categories = categoryService.findAll();	
-		tagStrings = tagsToString();
-        return SUCCESS;
-	}
-	
-	@Action("create")
-	@SkipValidation
-	public String create() {
-		return SUCCESS;
-	}
-	
-	@Action(value = "create-processing", results = {
-			@Result(name = SUCCESS, location = "list", type = "redirect"),
-			@Result(name = "input", location = "create.jsp")})
-	public String createProcessing(){
-		 //le agrego al post usuario de session
-		post.setUser(sessionUser);
-		
-		//parcing tagStrings and creates tags
-		String[] tagNames = tagStrings.split(",");
-		
-		//custom save
-		postService.savePostWithTags(post,tagNames);
-		return SUCCESS;
-	}
-	
-	
-	
-	@Action(value = "save", results = { 
-			@Result(name = SUCCESS, location = "list", type = "redirect"),
-			@Result(name = "input", location = "edit.jsp")})
-	public String save() {System.out.println("entreo");
-		
-		//parcing tagStrings and creates tags
-		String[] tagNames = tagStrings.split(",");
-		
-		//custom save
-		postService.savePostWithTags(post,tagNames);
-
-        return SUCCESS;
-	}
-	
-
-	@Action(value = "delete", results = { @Result(name = SUCCESS, location = "list", type = "redirect") })
-	@SkipValidation
-	public String deletePost() {
-		System.out.println("delete"+"delete     "+idPost);
-		postService.delete(idPost);
-		return SUCCESS;
-	}
+//	@Action(value = "delete", results = { @Result(name = SUCCESS, location = "list", type = "redirect") })
+//	@SkipValidation
+//	public String deletePost() {
+//		System.out.println("delete"+"delete     "+idPost);
+//		postService.delete(idPost);
+//		return SUCCESS;
+//	}
 
 
 	@Action(value = "saveComment", results = { 

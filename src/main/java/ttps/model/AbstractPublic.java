@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
+import com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -24,8 +25,8 @@ public abstract class AbstractPublic implements Serializable {
 
 	private String description;
 
-	@ManyToOne(fetch= FetchType.EAGER, cascade = CascadeType.DETACH)
-	@JoinColumn(name = "id_category")
+	@ManyToOne(fetch= FetchType.EAGER)
+	@JoinColumn(name = "id_category", nullable=false)
 	private Category category;
 
 	public long getId() {

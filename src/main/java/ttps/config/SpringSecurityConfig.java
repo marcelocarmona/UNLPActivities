@@ -3,10 +3,12 @@ package ttps.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.*;
 
+import ttps.model.Role;
 import ttps.security.CustomAuthenticationProvider;
 
 /**
@@ -68,6 +70,23 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/login**").permitAll()
 			.antMatchers("/logout*").permitAll()
 			.antMatchers("/listUser*").hasAuthority("ADMIN")
+			
+			
+			.antMatchers("/post/create**").hasAnyAuthority(	Role.ADMIN.getAuthority(),
+															Role.MODERATOR.getAuthority(),
+															Role.STUDENT.getAuthority())
+			
+			.antMatchers("/post/edit**").hasAnyAuthority(	Role.ADMIN.getAuthority(),
+															Role.MODERATOR.getAuthority(),
+															Role.STUDENT.getAuthority())
+															
+//			.antMatchers("/post/create**").hasAuthority(Role.MODERATOR.getAuthority())
+//			.antMatchers("/post/create**").hasAuthority(Role.STUDENT.getAuthority())
+//			.antMatchers("/post/create-processing**").hasAuthority(Role.ADMIN.getAuthority())
+//			.antMatchers("/post/create-processing**").hasAuthority(Role.MODERATOR.getAuthority())
+//			.antMatchers("/post/create-processing**").hasAuthority(Role.STUDENT.getAuthority())
+
+			
 //			.anyRequest().authenticated()
 			.and()
          .formLogin()

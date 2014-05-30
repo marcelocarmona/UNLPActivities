@@ -5,25 +5,24 @@
 
 <jsp:include page="layout/header.jsp" />
 
+<div class="panel panel-default">
+	<div class="panel-heading">Información del trabajo final</div>
+	<div class="panel-body">
 
-${session["SPRING_SECURITY_CONTEXT"]}
+		<p>Frameworks utilizados</p>
+
+			<ul class="task-list">
+				<li>Spring Data Jpa</li>
+				<li>Hibernate</li>
+				<li>Spring Security</li>
+				<li>Struts 2</li>
+				<li>Bootstrap</li>
+			</ul>
+
+	</div>
+</div>
 
 
-<h3>Index de Prueba</h3>
-
-<br />Desde un JSP
-<br />Objeto User : <s:property value="#session.SPRING_SECURITY_CONTEXT.authentication.principal" />
-<br />User role: <s:property value="#session.SPRING_SECURITY_CONTEXT.authentication.authorities" />
-<br />
-<br />
-<br />Desde un Action (hay que castear)
-<p>
-	System.out.println(((org.springframework.security.core.context.SecurityContext)
-	ActionContext.getContext().getSession().get("SPRING_SECURITY_CONTEXT")).getAuthentication().getAuthorities());</p>
-
-
-
-<br />User : <s:property value="#session.SPRING_SECURITY_CONTEXT.authentication.principal.id" />
 <jsp:include page="layout/footer.jsp" />
 
 

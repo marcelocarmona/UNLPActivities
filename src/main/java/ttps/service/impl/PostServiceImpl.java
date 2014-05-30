@@ -114,4 +114,9 @@ public class PostServiceImpl implements PostService {
 
 	}
 
+	@Override
+	public List<Post> findPostsByIdCategory(Long id) {
+		return postRepository.findPostsByIdCategory(id);
+	}
+
 }

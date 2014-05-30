@@ -8,7 +8,7 @@
 <div class="panel panel-default">
 	<div class="panel-body">
 		<s:form action="create-processing" method="post" theme="bootstrap"
-			cssClass="form-horizontal" label="Post">
+			cssClass="form-horizontal" label="Create a Post">
 <%-- 			<s:hidden name="post.id" /> --%>
 			
 <%-- 			<s:hidden name="post.user.id" value="2" /> --%>

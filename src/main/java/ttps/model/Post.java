@@ -19,7 +19,7 @@ public class Post extends AbstractPublic {
 
 	private static final long serialVersionUID = 1L;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "post", cascade = CascadeType.DETACH)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "post", cascade = {CascadeType.DETACH,CascadeType.REMOVE})
 	private Set<Comment> comments = new HashSet<>();
 
 	
@@ -30,8 +30,8 @@ public class Post extends AbstractPublic {
 	@ManyToMany(fetch = FetchType.EAGER )
 	private Set<Tag> tags = new HashSet<>();
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-	@JoinColumn(name = "id_user")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_user", nullable=false)
 	private User user;
 
 	public User getUser() {
@@ -79,4 +79,12 @@ public class Post extends AbstractPublic {
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+	@Override
+	public String toString() {
+		return "Post [id="+getId()+", category="+getCategory()+", content=" + content + ", privacity=" + privacity
+				+ ", tags=" + tags + ", user=" + user + "]";
+	}
+	
+	
 }

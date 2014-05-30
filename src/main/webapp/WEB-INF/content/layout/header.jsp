@@ -111,7 +111,7 @@ border-radius: 4px;
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href="${pageContext.request.contextPath}/post/list">list</a></li>
-								<li><a href="${pageContext.request.contextPath}/post/edit">create</a></li>
+								<li><a href="${pageContext.request.contextPath}/post/create">create</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -137,23 +137,17 @@ border-radius: 4px;
 								<li><a href="${pageContext.request.contextPath}/category/list">list</a></li>
 							</ul>
 						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
 						<sec:authorize access="isAnonymous()">
 						<li class="dropdown">
 							<a 	href="${pageContext.request.contextPath}/register" 
 								>
-								Sign in
+								Sign up
 								
 							</a>
 						</li>
 						</sec:authorize>
-					</ul>
-					<form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Search">
-						</div>
-						<button type="submit" class="btn btn-default">Submit</button>
-					</form>
-					<ul class="nav navbar-nav navbar-right">
 					<li>
 						<s:if test="%{#session.SPRING_SECURITY_CONTEXT.authentication.authenticated}">
 							<li class="dropdown">
@@ -161,7 +155,8 @@ border-radius: 4px;
 									class="dropdown-toggle"
 									data-toggle="dropdown">
 									<i class="glyphicon glyphicon-user"></i>
-									<s:property value="#session.SPRING_SECURITY_CONTEXT.authentication.principal.name" />
+									<s:property value="#session.SPRING_SECURITY_CONTEXT.authentication.principal.username" />
+									[<s:property value="#session.SPRING_SECURITY_CONTEXT.authentication.principal.role" />]
 									<b class="caret"></b>
 								</a>
 								<ul class="dropdown-menu">

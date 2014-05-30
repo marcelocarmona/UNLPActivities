@@ -7,11 +7,11 @@
 
 <div class="panel panel-default">
 	<div class="panel-body">
-		<s:form action="save" method="post" theme="bootstrap"
+		<s:form action="edit-processing" method="post" theme="bootstrap"
 			cssClass="form-horizontal" label="Post">
 			
 			<!--  hiddens que se tienen que mantener -->
-			<s:hidden name="post.id" />
+			<s:hidden name="post.id"  />
 			<s:hidden name="post.user.id" />
 
 			<s:textfield name="post.title" label="Title" />

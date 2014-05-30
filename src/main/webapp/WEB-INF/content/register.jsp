@@ -4,14 +4,10 @@
 
 <jsp:include  page="/WEB-INF/content/layout/header.jsp" />
 
-	<s:actionerror theme="bootstrap" />
-	<s:actionmessage theme="bootstrap" />
-	<s:fielderror theme="bootstrap" />
-
 <div class="panel panel-default">
 <div class="panel-body">
 	<s:form action="saveGuest" method="post" theme="bootstrap"
-		cssClass="form-horizontal " label="User Form">
+		cssClass="form-horizontal " label="Sign up">
 		
 		<s:textfield 
 			name="user.username" 

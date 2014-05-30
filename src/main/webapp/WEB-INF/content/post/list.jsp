@@ -4,60 +4,47 @@
 
 <jsp:include  page="/WEB-INF/content/layout/header.jsp" />
 
-<div class="table-responsive panel panel-default">
-<table class="table">
-		<thead>
-			<tr>
-				<th>Titulo</th>
-				<th>Descripcion</th>
-				<th>Categoria</th>
-				<th>Contenido</th>
-				<th>Tags</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			<s:iterator value="posts">
-				<tr>
-					<td>
-						<s:url id="viewURL" action="view">
-							<s:param name="idPost" value="%{id}"></s:param>
-						</s:url>
-						<s:a href="%{viewURL}"><s:property value="title" /></s:a>
-					</td>
-					<td><s:property value="description" /></td>
-					<td><s:property value="category" /></td>
-					<td><s:property value="content" /></td>
-					<td>
-						<s:iterator value="tags">
-							<s:property value="name" />
-						</s:iterator>					
-					</td>
-					
-					
-					<sec:authorize access="hasAnyRole('ADMIN','MODERATOR')">
-					<td>
-						<s:url id="editURL" action="edit">
-							<s:param name="idPost" value="%{id}"></s:param>
-						</s:url> 
-						<s:url id="deleteURL" action="delete">
-							<s:param name="idPost"><s:property value="id" /></s:param>
-						</s:url> 
-						<s:url id="viewURL" action="view">
-							<s:param name="idPost"><s:property value="id" /></s:param>
-						</s:url>
-							<div class="btn-group" >
-								<s:a href="%{editURL}" cssClass="btn btn-xs btn-default">Edit</s:a>
-								<s:a href="%{viewURL}" cssClass="btn btn-xs btn-default">View</s:a>
-								<s:a href="%{deleteURL}" cssClass="btn btn-xs btn-default">Delete</s:a>
-							</div>
-					</td>
-					</sec:authorize>
-				</tr>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('i').tooltip();
+	});
+</script>
+
+<div class="panel panel-default">
+<div class="panel-heading">
+	<s:form id="filter-form" action="filter-processing" method="post" theme="bootstrap"
+		label="Filter">
+		
+		<s:select name="idCategory" label="Category" 
+		list="categories" listKey="id" listValue="name" onchange="this.form.submit()"/>
+
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	</s:form>
+
+
+</div>
+	<div class="list-group">
+		<s:iterator value="posts">
+				<s:url id="editURL" action="edit">
+					<s:param name="idPost" value="%{id}"></s:param>
+				</s:url> 
+				<s:url id="deleteURL" action="delete-processing">
+					<s:param name="idPost"><s:property value="id" /></s:param>
+				</s:url> 
+				<s:url id="viewURL" action="view">
+					<s:param name="idPost"><s:property value="id" /></s:param>
+				</s:url>
+			<div class="list-group-item">
+				<s:a href="%{deleteURL}"><i class="glyphicon glyphicon-trash" data-original-title="delete"></i></s:a>
+				<s:a href="%{editURL}"><i class="glyphicon glyphicon-edit" data-original-title="edit"></i></s:a>
+				<s:a href="%{viewURL}"><s:property value="title"/></s:a>
 				
-			</s:iterator>
-		</tbody>
-	</table>
+				<span class="badge"><s:property value="category" /></span>
+				
+				
+			</div>
+		</s:iterator>
+	</div>
 </div>
 
 <jsp:include page="/WEB-INF/content/layout/footer.jsp" />
