@@ -33,20 +33,22 @@
 	</div>
 </div>
 
-<sec:authorize access="isAuthenticated()">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<s:form action="/comment/create-processing" method="post"
-				theme="bootstrap" label="Comment">
-				<s:textarea name="comment.content" cssClass="form-control" />
-				<s:hidden value="2 " name="comment.user.id" />
-				<s:hidden value="%{post.id}" name="comment.post.id" />
 
-				<s:submit value="Enviar" cssClass="btn btn-default" />
-				<input type="hidden" name="${_csrf.parameterName}"
-					value="${_csrf.token}" />
-			</s:form>
-		</div>
+	<div class="panel panel-default">
+		<sec:authorize access="isAuthenticated()">
+			<div class="panel-heading">
+				<s:form action="/comment/create-processing" method="post"
+					theme="bootstrap" label="Comment">
+					<s:textarea name="comment.content" cssClass="form-control" />
+					<s:hidden value="2 " name="comment.user.id" />
+					<s:hidden value="%{post.id}" name="comment.post.id" />
+	
+					<s:submit value="Enviar" cssClass="btn btn-default" />
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+				</s:form>
+			</div>
+		</sec:authorize>
 		<ul class="list-group">
 			<s:iterator value="post.comments" status="commentStatus">
 				<li class="list-group-item">
@@ -61,6 +63,6 @@
 			</s:iterator>
 		</ul>
 	</div>
-</sec:authorize>
+
 
 <jsp:include page="/WEB-INF/content/layout/footer.jsp" />
