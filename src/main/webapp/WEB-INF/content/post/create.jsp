@@ -22,7 +22,7 @@
 			<s:textarea name="post.content" label="Content" cols="80" rows="20" />
 
 			<s:textfield label="Tags" name="tagStrings" data-role="tagsinput"
-				placeholder="Add tags"  />
+				placeholder="Add tags" tooltip="presionar espacio para separar los tags" />
 
 			<s:checkbox name="post.privacity" label="Privado?" />
 

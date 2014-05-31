@@ -19,7 +19,7 @@
 						tooltip="Enter your password here"/>
 		
 		<s:submit 
-			value="Save" 
+			value="Sign up" 
 			cssClass="btn btn-primary btn-block" />
 			
 		

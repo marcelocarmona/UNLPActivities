@@ -73,13 +73,18 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/post/view**").permitAll()
 			
 			
-//			.antMatchers("/post/create**").hasAnyAuthority(	Role.ADMIN.getAuthority(),
-//															Role.MODERATOR.getAuthority(),
-//															Role.STUDENT.getAuthority())
-//			
-//			.antMatchers("/post/edit**").hasAnyAuthority(	Role.ADMIN.getAuthority(),
-//															Role.MODERATOR.getAuthority(),
-//															Role.STUDENT.getAuthority())
+			.antMatchers("/post/create**").hasAnyAuthority(	Role.ADMIN.getAuthority(),
+															Role.MODERATOR.getAuthority(),
+															Role.STUDENT.getAuthority())
+			
+			.antMatchers("/post/edit**").hasAnyAuthority(	Role.ADMIN.getAuthority(),
+															Role.MODERATOR.getAuthority(),
+															Role.STUDENT.getAuthority())
+															
+			.antMatchers("/user/edit**").hasAuthority(	Role.ADMIN.getAuthority())
+			
+			.antMatchers("/user/list**").hasAnyAuthority(	Role.ADMIN.getAuthority(),
+															Role.MODERATOR.getAuthority())
 															
 //			.antMatchers("/post/create**").hasAuthority(Role.MODERATOR.getAuthority())
 //			.antMatchers("/post/create**").hasAuthority(Role.STUDENT.getAuthority())

@@ -7,7 +7,9 @@
 
 
 
-<div class="table-responsive panel panel-default">
+<div class=" panel panel-default">
+<div class="panel-body">
+<div class="table-responsive">
 	<table class="table table-responsive " >
 		<thead>
 			<tr>
@@ -37,26 +39,27 @@
 					<td><s:property value="nationality" /></td>
 					<td><s:property value="profession" /></td>
 					<td><s:property value="role" /></td>
-					
-					<td>
-						<s:url id="editURL" action="edit">
-							<s:param name="id" value="%{id}"></s:param>
-						</s:url> 
-						<s:url id="deleteURL" action="delete">
-							<s:param name="id"><s:property value="id" /></s:param>
-						</s:url> 
-						<sec:authorize access="hasAnyRole('ADMIN')">
-							<div class="btn-group" >
-								<s:a href="%{deleteURL}"><i class="glyphicon glyphicon-trash" data-original-title="delete"></i></s:a>
-								<s:a href="%{editURL}"><i class="glyphicon glyphicon-edit" data-original-title="edit"></i></s:a>
-							</div>
-						</sec:authorize>
-					</td>
+					<sec:authorize access="hasAnyRole('ADMIN')">
+						<td>
+							<s:url id="editURL" action="edit">
+								<s:param name="id" value="%{id}"></s:param>
+							</s:url> 
+							<s:url id="deleteURL" action="delete">
+								<s:param name="id"><s:property value="id" /></s:param>
+							</s:url> 
+							
+								<div class="btn-group" >
+									<s:a href="%{deleteURL}"><i class="glyphicon glyphicon-trash" data-original-title="delete"></i></s:a>
+									<s:a href="%{editURL}"><i class="glyphicon glyphicon-edit" data-original-title="edit"></i></s:a>
+								</div>
+							
+						</td>
+					</sec:authorize>
 				</tr>
 			</s:iterator>
 		</tbody>
 	</table>
+	</div>
 </div>
-
-
+</div>
 <jsp:include page="/WEB-INF/content/layout/footer.jsp" />
